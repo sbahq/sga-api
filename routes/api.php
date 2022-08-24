@@ -18,13 +18,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/teste/{id}', function ($id) {
+    return response()->json($id, 200);
+});
+
 Route::group([
     'middleware' => ['api', 'check.oauth.permission']
 ], function ( $router ) {
-
-    Route::get('/teste/{id}', function ($id) {
-        return response()->json($id, 200);
-    });
 
     Route::group([
         'prefix' => 'socio'
