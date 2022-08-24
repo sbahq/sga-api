@@ -17,3 +17,29 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'middleware' => ['api', 'check.oauth.permission']
+], function ( $router ) {
+
+    Route::get('/teste/{id}', function ($id) {
+        return response()->json($id, 200);
+    });
+
+    Route::group([
+        'prefix' => 'socio'
+    ], \App\Routers\SocioRouter::instance()->router( $router ));
+
+    Route::group([
+        'prefix' => 'instrutor'
+    ], \App\Routers\InstrutorRouter::instance()->router( $router ));
+
+    Route::group([
+        'prefix' => 'regional'
+    ], \App\Routers\RegionalRouter::instance()->router( $router ));
+
+    Route::group([
+        'prefix' => 'cet'
+    ], \App\Routers\CetRouter::instance()->router( $router ));
+
+});

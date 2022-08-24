@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-return new class extends Migration
+class CreateCorporationPersonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('corporation_persons', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('fantasy_name', 150);
+            $table->unsignedBigInteger('person_id')->nullable();
             $table->string('guid')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->foreign('person_id')->references('id')->on('persons');
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('corporation_persons');
     }
-};
+}

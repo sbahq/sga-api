@@ -63,6 +63,17 @@ return [
             ]) : [],
         ],
 
+        'mysql_sbahq' => [
+            'driver'    => 'mysql',
+            'host'      => \App\Helpers\AppConstantes::instance()->DB_HOST_SBAHQ,
+            'database'  => \App\Helpers\AppConstantes::instance()->DB_DATABASE_SBAHQ,
+            'username'  => \App\Helpers\AppConstantes::instance()->DB_USERNAME_SBAHQ,
+            'password'  => \App\Helpers\AppConstantes::instance()->DB_PASSWORD_SBAHQ,
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
