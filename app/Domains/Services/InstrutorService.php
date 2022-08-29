@@ -18,4 +18,8 @@ class InstrutorService
         return $this->repository->getInstrutores();
     }
 
+    public function getInstrutoresCet($matriculaCET){
+        return $this->repository->getInstrutoresCet($matriculaCET);
+    }
+
 }

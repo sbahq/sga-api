@@ -42,4 +42,8 @@ Route::group([
         'prefix' => 'cet'
     ], \App\Routers\CetRouter::instance()->router( $router ));
 
+    Route::group([
+        'prefix' => 'vaga'
+    ], \App\Routers\VagaRouter::instance()->router( $router ));
+
 });

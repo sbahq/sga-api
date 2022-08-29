@@ -17,19 +17,32 @@ class InstrutorRepository
 
     private function returnArrayInstrutor($instrutor){
         return array(
-            'id_pessoa' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($instrutor->id_pessoa),
-            'matricula' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($instrutor->matricula),
-            'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($instrutor->nome),
-            'data_credencial' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_credencial,'Y-m-d'),
-            'data_vencimento' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_vencimento,'Y-m-d'),
-            'ano_cet' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($instrutor->ano_cet),
-            'matricula_cet' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($instrutor->matricula_cet),
+            'id_pessoa' => $instrutor->id_pessoa,
+            'matricula' => $instrutor->matricula,
+            'nome' => $instrutor->nome,
+            'regional' => $instrutor->regional,
+            'ano_cet' => $instrutor->ano_cet,
+            'matricula_cet' => $instrutor->matricula_cet,
             'cet' => $instrutor->cet,
+            'data_emissao_credencial' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_emissao_credencial,'Y-m-d'),
+            'data_vencimento_credencial' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_vencimento_credencial,'Y-m-d'),
+            'dias_restantes_vencimento_credencial' => $instrutor->dias_restantes_vencimento_credencial,
+            'status_credencial_vencida' => $instrutor->status_credencial_vencida,
+            'status_credencial_vencida_descricao' => $instrutor->status_credencial_vencida_descricao,
+            'ano_regional' => $instrutor->ano_regional,
+            'ano_sba' => $instrutor->ano_sba,
+            'data_proximo_vencimento_sba' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_proximo_vencimento_sba,'Y-m-d'),
+            'data_proximo_vencimento_regional' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_proximo_vencimento_regional,'Y-m-d'),
+            'anuidade_sba_vencida_status' => $instrutor->anuidade_sba_vencida_status,
+            'anuidade_sba_vencida_status_descricao' => $instrutor->anuidade_sba_vencida_status_descricao,
+            'dias_restantes_vencimento_sba' => $instrutor->dias_restantes_vencimento_sba,
+            'anuidade_regional_vencida_status' => $instrutor->anuidade_regional_vencida_status,
+            'anuidade_regional_vencida_status_descricao' => $instrutor->anuidade_regional_vencida_status_descricao,
+            'dias_restantes_vencimento_regional' => $instrutor->dias_restantes_vencimento_regional,            
         );
     }
 
-    public function getInstrutores(){
-        $instrutores = $this->model->getInstrutores();
+    private function returnLista($instrutores){
         $response = [];
         $return = [];
 
@@ -44,6 +57,14 @@ class InstrutorRepository
             $response = $this->validate->getErrorMessage($message);
         }
         return $response;
+    }
+
+    public function getInstrutores(){
+        return $this->returnLista($this->model->getInstrutores());
+    }
+
+    public function getInstrutoresCet($matriculaCET){
+        return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
     }
 
 }
