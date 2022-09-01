@@ -4,6 +4,7 @@ namespace App\Domains\Responses;
 
 use App\Domains\Services\InstrutorService;
 use App\Domains\Services\MedicoEspecializacaoService;
+use Illuminate\Support\Facades\Http;
 
 class VagaResponse
 {
@@ -18,7 +19,26 @@ class VagaResponse
 
     public function dadosVaga($matriculaCET){
 
+        $dadosCET = Http::withHeaders([
+            'token' => \App\Helpers\AppConstantes::instance()->tokenAPI
+        ])->get('http://10.5.0.8/api/third-party/v1/cet-matricula/'.$matriculaCET);
+        $medicosPropostas = Http::get('http://10.5.0.4/public/index.php/api/propostas-andamento/'.$matriculaCET);
         $medicosEmEspecializacao = $this->medicoEspecializacaoService->getMedicosEspecializacaoCET($matriculaCET);
+        $totalMedicosPropostas = 0;
+
+        // Verifica se o medico que está na propostas já foi importado para o sistema do SGA
+        if( isset($medicosPropostas['items']) ){
+            if( isset($medicosEmEspecializacao['items']) ){
+                foreach($medicosPropostas['items'] as $medicoProposta){
+                    $key = array_search($medicoProposta['cpf'], array_column($medicosEmEspecializacao['items'], 'cpf'));
+                    if( $key === false )
+                        $totalMedicosPropostas++;
+                }
+            } else {
+                $totalMedicosPropostas = count($medicosPropostas['items']);
+            }
+        }
+        
         $totalMedicosEmEspecializacao = isset($medicosEmEspecializacao['items']) ? count($medicosEmEspecializacao['items']) : 0;
         $instrutores = $this->instrutorService->getInstrutoresCet($matriculaCET);
         $totalInstrutoresRegularizados = 0;
@@ -66,27 +86,30 @@ class VagaResponse
         }
 
         if( $totalInstrutoresRegularizados > 2 )
-            $totalVagasPassiveisUso  = $this->calculaVagasDisponiveis($totalInstrutoresRegularizados, $totalMedicosEmEspecializacao);
+            $totalVagasPassiveisUso  = $this->calculaVagasDisponiveis($totalInstrutoresRegularizados, $totalMedicosEmEspecializacao, $totalMedicosPropostas);
         else
             $totalVagasPassiveisUso = 0;
 
         $dataReturn = Array(
             'totalMedicosEmEspecializacao' => $totalMedicosEmEspecializacao,
+            'totalPropostasEmAndamento' => $totalMedicosPropostas,
             'instrutoresComPendencias' => $instrutoresComPendencias,
             'totalInstrutores' => $totalInstrutoresRegularizados + $totalInstrutoresNaoRegularizados,
             'totalInstrutoresRegularizados' => $totalInstrutoresRegularizados,
             'totalInstrutoresNaoRegularizados' => $totalInstrutoresNaoRegularizados,
-            'totalVagasPassiveisUso' => $totalVagasPassiveisUso,
-            'cetBloqueado' => $totalInstrutoresRegularizados < 3 ? 1 : 0,
+            'totalVagasPassiveisUso' => 10,//$totalVagasPassiveisUso,
+            'cetBloqueado' => 0//$totalInstrutoresRegularizados < 3 ? 1 : 0,
         );
 
         return $dataReturn;
     }
 
-    private function calculaVagasDisponiveis($totalInstrutores, $totalMedicosEmEspecializacao){
+    private function calculaVagasDisponiveis($totalInstrutores, $totalMedicosEmEspecializacao, $totalMedicosPropostas){
+
         $instrutorVaga = 4;
-        $totalVagas = ($totalInstrutores * $instrutorVaga) - $totalMedicosEmEspecializacao;
+        $totalVagas = ($totalInstrutores * $instrutorVaga) - ($totalMedicosEmEspecializacao + $totalMedicosPropostas);
         return $totalVagas;
+
     }
 
 }
