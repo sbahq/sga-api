@@ -20,9 +20,9 @@ class VagaResponse
     public function dadosVaga($matriculaCET){
 
         $dadosCET = Http::withHeaders([
-            'token' => \App\Helpers\AppConstantes::instance()->tokenAPI
-        ])->get('http://10.5.0.8/api/third-party/v1/cet-matricula/'.$matriculaCET);
-        $medicosPropostas = Http::get('http://10.5.0.4/public/index.php/api/propostas-andamento/'.$matriculaCET);
+            'token' => \App\Helpers\AppConstantes::instance()->TOKEN_API
+        ])->get(\App\Helpers\AppConstantes::instance()->URL_API . 'third-party/v1/cet-matricula/'.$matriculaCET);
+        $medicosPropostas = Http::get( \App\Helpers\AppConstantes::instance()->URL_API_PROPOSTA . 'propostas-andamento/'.$matriculaCET);
         $medicosEmEspecializacao = $this->medicoEspecializacaoService->getMedicosEspecializacaoCET($matriculaCET);
         $totalMedicosPropostas = 0;
 
