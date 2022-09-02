@@ -19,7 +19,7 @@ class VagaResponse
 
     public function dadosVaga($matriculaCET){
 
-        $dadosCET = Http::withHeaders([
+        return $dadosCET = Http::withHeaders([
             'token' => \App\Helpers\AppConstantes::instance()->TOKEN_API
         ])->get(\App\Helpers\AppConstantes::instance()->URL_API . 'third-party/v1/cet-matricula/'.$matriculaCET);
 
