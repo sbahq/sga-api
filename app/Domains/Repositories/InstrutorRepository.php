@@ -67,4 +67,16 @@ class InstrutorRepository
         return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
     }
 
+    public function getTotalInstrutoresCETById($cetID){
+        $totalInstrutores = $this->model->getTotalInstrutoresCETById($cetID);
+        $response = [];
+        $return = [];
+
+        array_push($return, array('total_instrutores_regularizados' => $totalInstrutores[0]->total_instrutores_regulares));
+        $response = $this->validate->getSuccessMessage();
+        $response['items'] = $return;
+        return $response;
+        
+    }
+
 }

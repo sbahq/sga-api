@@ -99,7 +99,7 @@ class VagaResponse
             'totalInstrutoresRegularizados' => $totalInstrutoresRegularizados,
             'totalInstrutoresNaoRegularizados' => $totalInstrutoresNaoRegularizados,
             'totalVagasPassiveisUso' => $totalVagasPassiveisUso,
-            'cetBloqueado' => $totalInstrutoresRegularizados < 3 ? 1 : 0,
+            'cetBloqueado' => 1//$totalInstrutoresRegularizados < 3 ? 1 : 0,
         );
 
         return $dataReturn;

@@ -24,4 +24,21 @@ class Instrutor extends Model
 
     }
 
+    public function getTotalInstrutoresCETById($cetID){
+
+        $sql = "select ";
+        $sql.="count(*) total_instrutores_regulares ";
+        $sql.="from ";
+        $sql.="vw_instrutores_vagas v ";
+        $sql.="where ";
+        $sql.="v.cet_id = {$cetID} ";
+        $sql.="and v.dias_restantes_vencimento_credencial  > 0 ";
+        $sql.="and v.dias_restantes_vencimento_sba > 0 ";
+        $sql.="and v.dias_restantes_vencimento_regional > 0";
+        $instrutores = DB::connection('mysql_sbahq')->select($sql);
+        return $instrutores;
+
+    }
+
+
 }

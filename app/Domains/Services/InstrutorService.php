@@ -22,4 +22,8 @@ class InstrutorService
         return $this->repository->getInstrutoresCet($matriculaCET);
     }
 
+    public function getTotalInstrutoresCETById($cetID){
+        return $this->repository->getTotalInstrutoresCETById($cetID);
+    }
+
 }

@@ -18,4 +18,8 @@ class InstrutorResponse
         return $this->service->getInstrutoresCet($matriculaCET);
     }
 
+    public function getTotalInstrutoresCETById($cetID){
+        return $this->service->getTotalInstrutoresCETById($cetID);
+    }
+
 }
