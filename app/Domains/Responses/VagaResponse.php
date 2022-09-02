@@ -22,6 +22,8 @@ class VagaResponse
         $dadosCET = Http::withHeaders([
             'token' => \App\Helpers\AppConstantes::instance()->TOKEN_API
         ])->get(\App\Helpers\AppConstantes::instance()->URL_API . 'third-party/v1/cet-matricula/'.$matriculaCET);
+
+        return $dadosCET['items'][0]['id'];
         $medicosPropostas = Http::get( \App\Helpers\AppConstantes::instance()->URL_API_PROPOSTA . 'propostas-andamento/'.$dadosCET['items'][0]['id']);
         $medicosEmEspecializacao = $this->medicoEspecializacaoService->getMedicosEspecializacaoCET($matriculaCET);
         $totalMedicosPropostas = 0;
