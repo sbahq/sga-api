@@ -4,7 +4,6 @@ namespace App\Domains\Responses;
 
 use App\Domains\Services\InstrutorService;
 
-
 class InstrutorResponse
 {
     private $service;
@@ -20,6 +19,14 @@ class InstrutorResponse
 
     public function getTotalInstrutoresCETById($cetID){
         return $this->service->getTotalInstrutoresCETById($cetID);
+    }
+
+    public function getResponsaveisCET(){
+        return $this->service->getResponsaveisCET();
+    }
+
+    public function getInstrutoresComPendencias($matriculaCET, $daysToExpiration){
+        return $this->service->getInstrutoresComPendencias($matriculaCET, $daysToExpiration);
     }
 
 }

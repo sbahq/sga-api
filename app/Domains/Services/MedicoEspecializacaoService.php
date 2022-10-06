@@ -19,4 +19,12 @@ class MedicoEspecializacaoService
         return $this->repository->getMedicosEspecializacaoCET($matriculaCET);
     }
 
+    public function getMedicosEspecializacao(){
+        return $this->repository->getMedicosEspecializacao();
+    }
+
+    public function getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration){
+        return $this->repository->getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration);
+    }
+
 }

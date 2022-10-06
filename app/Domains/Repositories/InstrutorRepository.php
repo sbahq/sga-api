@@ -20,6 +20,13 @@ class InstrutorRepository
             'id_pessoa' => $instrutor->id_pessoa,
             'matricula' => $instrutor->matricula,
             'nome' => $instrutor->nome,
+            'sexo' => $instrutor->sexo,
+            'categoria' => $instrutor->categoria,
+            'categoria_nome' => $instrutor->categoria_nome,
+            'tratamento' => $instrutor->tratamento,
+            'prezado' => $instrutor->prezado,
+            'email' => $instrutor->email,
+            'tipo' => $instrutor->tipo,
             'regional' => $instrutor->regional,
             'ano_cet' => $instrutor->ano_cet,
             'matricula_cet' => $instrutor->matricula_cet,
@@ -76,7 +83,14 @@ class InstrutorRepository
         $response = $this->validate->getSuccessMessage();
         $response['items'] = $return;
         return $response;
-        
+    }
+
+    public function getResponsaveisCET(){
+        return $this->returnLista($this->model->getResponsaveisCET());
+    }
+
+    public function getInstrutoresComPendencias($matriculaCET, $daysToExpiration){
+        return $this->returnLista($this->model->getInstrutoresComPendencias($matriculaCET, $daysToExpiration));
     }
 
 }

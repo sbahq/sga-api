@@ -16,4 +16,18 @@ class MedicoEspecializacao extends Model
 
     }
 
+    public function getMedicosEspecializacao(){
+
+        $sql = "select * from vw_me_cet vmc order by vmc.nome limit 2";
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
+        return $medicos;
+
+    }
+
+    public function getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration){
+        $sql = "select * from vw_me_cet vmc where matricula_cet = {$matriculaCET} and (dias_restantes_vencimento_sba = $daysToExpiration or dias_restantes_vencimento_regional = $daysToExpiration) order by nome ";
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
+        return $medicos;
+    }
+
 }

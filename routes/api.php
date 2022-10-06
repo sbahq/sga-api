@@ -35,6 +35,10 @@ Route::group([
     ], \App\Routers\InstrutorRouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'medico-especializacao'
+    ], \App\Routers\MedicoEspecializacaoRouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'regional'
     ], \App\Routers\RegionalRouter::instance()->router( $router ));
 
