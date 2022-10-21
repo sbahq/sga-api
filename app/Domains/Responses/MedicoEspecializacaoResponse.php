@@ -18,6 +18,10 @@ class MedicoEspecializacaoResponse
         return $this->service->getMedicosEspecializacaoCET($matriculaCET);
     }
 
+    public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
+        return $this->service->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET);
+    }
+
     public function getMedicosEspecializacao(){
         return $this->service->getMedicosEspecializacao();
     }

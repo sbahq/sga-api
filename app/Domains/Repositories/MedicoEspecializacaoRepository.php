@@ -68,6 +68,10 @@ class MedicoEspecializacaoRepository
         return $this->returnLista($this->model->getMedicosEspecializacaoCET($matriculaCET));
     }
 
+    public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
+        return $this->returnLista($this->model->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET));
+    }
+
     public function getMedicosEspecializacao(){
         return $this->returnLista($this->model->getMedicosEspecializacao());
     }

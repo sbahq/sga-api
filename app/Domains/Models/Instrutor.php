@@ -10,7 +10,7 @@ class Instrutor extends Model
 
     public function getInstrutores(){
 
-        $sql = "select * from vw_instrutores_vagas viv order by nome limit 2";
+        $sql = "select * from vw_instrutores_vagas viv order by nome";
         $instrutores = DB::connection('mysql_sbahq')->select($sql);
         return $instrutores;
 
