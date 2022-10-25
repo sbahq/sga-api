@@ -23,14 +23,16 @@ class DadosAnestesicos extends Model
         }
         $texto = [];
         foreach($codigo as $cod){
-            $sql = "select * from SGAP.SGAP_CODIGOS where code = {$cod}";
-            $dadosCodigos = DB::connection('mysql_sbahq')->select($sql);
-            foreach($dadosCodigos as $dado){
-                if( !isset($items[$cod]) ){
-                    $items[$cod]['nome'] = $dado->procedimento;
-                    $items[$cod]['total'] = 1;
-                } else {
-                    $items[$cod]['total'] = $items[$cod]['total'] + 1;
+            if( strlen(trim($cod)) > 0 ){
+                $sql = "select * from SGAP.SGAP_CODIGOS where code = {$cod}";
+                $dadosCodigos = DB::connection('mysql_sbahq')->select($sql);
+                foreach($dadosCodigos as $dado){
+                    if( !isset($items[$cod]) ){
+                        $items[$cod]['nome'] = $dado->procedimento;
+                        $items[$cod]['total'] = 1;
+                    } else {
+                        $items[$cod]['total'] = $items[$cod]['total'] + 1;
+                    }
                 }
             }
         }
