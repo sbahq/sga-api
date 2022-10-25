@@ -90,7 +90,7 @@ class DadosAnestesicos extends Model
             sa.Matricula = {$matricula}
         ) t
         where
-            (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) = 2
+            (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) in(1,2,3)
         order by t.data_procedimento
         ";
 
