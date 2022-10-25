@@ -34,6 +34,9 @@ class DadosAnestesicos extends Model
                         $items[$cod]['total'] = $items[$cod]['total'] + 1;
                     }
                 }
+            } else {
+                $items[$cod]['nome'] = 'Não especificado';
+                $items[$cod]['total'] = 1;
             }
         }
     }
