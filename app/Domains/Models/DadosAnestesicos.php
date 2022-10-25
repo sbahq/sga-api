@@ -24,7 +24,6 @@ class DadosAnestesicos extends Model
         $texto = [];
         foreach($codigo as $cod){
             $sql = "select * from SGAP.SGAP_CODIGOS where code = {$cod}";
-            echo $sql;
             $dadosCodigos = DB::connection('mysql_sbahq')->select($sql);
             foreach($dadosCodigos as $dado){
                 if( !isset($items[$cod]) ){
