@@ -50,4 +50,8 @@ Route::group([
         'prefix' => 'vaga'
     ], \App\Routers\VagaRouter::instance()->router( $router ));
 
+    Route::group([
+        'prefix' => 'dados-anestesicos'
+    ], \App\Routers\DadosAnestesicosRouter::instance()->router( $router ));
+
 });
