@@ -41,7 +41,7 @@ class DadosAnestesicos extends Model
         }
     }
 
-    public function getDadosIndicadorME($matricula){
+    public function getDadosIndicadorME($matricula, $indicadorME){
 
         $sql = "select
         cm.IND_ME as ind_me,
@@ -50,7 +50,7 @@ class DadosAnestesicos extends Model
         date(max(cm.DT_FIM)) as dt_fim_me
         from CET_ME cm 
         where MATRICULAMEMBRO = {$matricula}
-        and cm.IND_ME = in(1, 2, 3)
+        and cm.IND_ME = $indicadorME
         group by
         cm.IND_ME,
         cm.MATRICULAMEMBRO";
@@ -59,7 +59,7 @@ class DadosAnestesicos extends Model
 
     }
 
-    public function getDadosLogbook($matricula){
+    public function getDadosLogbook($matricula, $indicadorME){
 
         $sql = "
         select * from (
@@ -111,7 +111,7 @@ class DadosAnestesicos extends Model
             sa.Matricula = {$matricula}
         ) t
         where
-            (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) in(1,2,3)
+            (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) = $indicadorME
         order by t.data_procedimento
         ";
 
