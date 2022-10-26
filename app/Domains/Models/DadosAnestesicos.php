@@ -41,6 +41,24 @@ class DadosAnestesicos extends Model
         }
     }
 
+    public function getDadosIndicadorME($matricula){
+
+        $sql = "select
+        cm.IND_ME as ind_me,
+        cm.MATRICULAMEMBRO,
+        date(min(cm.DT_INICIAL)) as dt_inicio_me,
+        date(max(cm.DT_FIM)) as dt_fim_me
+        from CET_ME cm 
+        where MATRICULAMEMBRO = {$matricula}
+        and cm.IND_ME = in(1, 2, 3)
+        group by
+        cm.IND_ME,
+        cm.MATRICULAMEMBRO";
+        
+        return DB::connection('mysql_sbahq')->select($sql);
+
+    }
+
     public function getDadosLogbook($matricula){
 
         $sql = "
