@@ -34,7 +34,7 @@ class AvaliacaoMedicoEspecializacaoRepository
             'prova_4' => \App\Helpers\AppHelper::instance()->formatarNumero($avaliacao->prova_4),
             'nota_trimestral' => \App\Helpers\AppHelper::instance()->formatarNumero($avaliacao->nota_trimestral),
             'nota_pn' => \App\Helpers\AppHelper::instance()->formatarNumero($avaliacao->nota_pn),
-            'nota_final' => \App\Helpers\AppHelper::instance()->formatarNumero(($avaliacao->nota_pn + $avaliacao->nota_trimestral)/2)
+            'nota_final' => ($avaliacao->nota_pn + $avaliacao->nota_trimestral)/2
         );
     }
 

@@ -16,8 +16,8 @@ class AvaliacaoMedicoEspecializacaoController extends Controller
     }
 
     public function getAvaliacoes(Request $request){
-        $requestAll = $request->all();
-        return $this->response->getAvaliacoes($requestAll['matricula']);
+        $data = $request->all();
+        return $this->response->getAvaliacoes($data['matricula']);
     }
 
 }
