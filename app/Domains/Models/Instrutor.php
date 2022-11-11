@@ -40,6 +40,22 @@ class Instrutor extends Model
 
     }
 
+    public function getInstrutoresRegularesCET($matriculaCET){
+
+        $sql = "select * from vw_instrutores_vagas viv where ";
+        $sql.= " viv.matricula_cet = {$matriculaCET} ";
+        $sql.=" and viv.dias_restantes_vencimento_credencial  > 0 ";
+        $sql.=" and viv.dias_restantes_vencimento_sba > 0 ";
+        $sql.=" and viv.dias_restantes_vencimento_regional > 0";
+        $sql.= " order by nome";
+        
+        $instrutores = DB::connection('mysql_sbahq')->select($sql);
+        return $instrutores;
+
+    }
+
+
+
     public function getTotalInstrutoresCETById($cetID){
 
         $sql = "select ";

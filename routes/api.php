@@ -39,6 +39,10 @@ Route::group([
     ], \App\Routers\MedicoEspecializacaoRouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'avaliacao-medico-especializacao'
+    ], \App\Routers\AvaliacaoMedicoEspecializacaoRouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'regional'
     ], \App\Routers\RegionalRouter::instance()->router( $router ));
 

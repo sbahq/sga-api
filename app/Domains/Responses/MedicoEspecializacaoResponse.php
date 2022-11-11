@@ -30,4 +30,12 @@ class MedicoEspecializacaoResponse
         return $this->service->getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration);
     }
 
+    public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
+        return $this->service->getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME);
+    }
+
+    public function getMedicoEspecializacao($matricula){
+        return $this->service->getMedicoEspecializacao($matricula);
+    }
+
 }

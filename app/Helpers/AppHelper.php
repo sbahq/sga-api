@@ -188,12 +188,21 @@ class AppHelper
         return $d && $d->format($format) == $date;
     }
 
-    function setMask($mask,$str){
+    public function setMask($mask,$str){
         $str = str_replace(" ","",$str);
         for($i=0;$i<strlen($str);$i++){
             $mask[strpos($mask,"#")] = $str[$i];
         }
         return $mask;    
     }
+
+    public function formatarNumero($value, $decimalLenght= 2){
+        if( is_numeric( $value ) ){
+            return  number_format( $value,$decimalLenght,",","");
+        }
+        return '';
+    }
+
+
 
 }

@@ -16,7 +16,7 @@ class DadosAnestesicosRouter
     public function router($router)
     {
         return function ($router) {
-            Route::get('/get-dados-logbook/{matricula}', [DadosAnestesicosController::class, 'getDadosLogbook']);
+            Route::get('/get-periodo-me/{matricula}', [DadosAnestesicosController::class, 'getPeriodoME']);
         };
     }
 }

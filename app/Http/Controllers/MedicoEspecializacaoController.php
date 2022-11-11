@@ -26,8 +26,18 @@ class MedicoEspecializacaoController extends Controller
         return $this->response->getMedicosEspecializacao();
     }
 
+    public function getMedicoEspecializacao(Request $request){
+        $requestAll = $request->all();
+        return $this->response->getMedicoEspecializacao($requestAll['matricula']);
+    }
+
     public function getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration){
         return $this->response->getMedicosEspecializacaoComPendencias($matriculaCET, $daysToExpiration);
+    }
+
+    public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome(Request $request){
+        $requestAll = $request->all();
+        return $this->response->getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($requestAll['matricula'], $requestAll['nome']);
     }
 
 }

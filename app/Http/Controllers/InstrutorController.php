@@ -24,6 +24,10 @@ class InstrutorController extends Controller
         return $this->response->getInstrutoresCet($matriculaCET);
     }
 
+    public function getInstrutoresRegularesCET($matriculaCET){
+        return $this->response->getInstrutoresRegularesCET($matriculaCET);
+    }
+
     public function getTotalInstrutoresCETById($cetID){
         return $this->response->getTotalInstrutoresCETById($cetID);
     }

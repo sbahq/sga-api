@@ -26,6 +26,7 @@ class InstrutorRepository
             'tratamento' => $instrutor->tratamento,
             'prezado' => $instrutor->prezado,
             'email' => $instrutor->email,
+            'celular' => $instrutor->celular,
             'tipo' => $instrutor->tipo,
             'regional' => $instrutor->regional,
             'ano_cet' => $instrutor->ano_cet,
@@ -72,6 +73,10 @@ class InstrutorRepository
 
     public function getInstrutoresCet($matriculaCET){
         return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
+    }
+
+    public function getInstrutoresRegularesCET($matriculaCET){
+        return $this->returnLista($this->model->getInstrutoresRegularesCET($matriculaCET));
     }
 
     public function getTotalInstrutoresCETById($cetID){

@@ -59,6 +59,50 @@ class DadosAnestesicos extends Model
 
     }
 
+    public function getPeriodoME($matricula){
+
+        $sql = "
+        select
+        cm.IND_ME as ind_me,
+        cm.MATRICULAMEMBRO as matriculamembro,
+        cm.ANO_CET as ano_cet,
+        date(min(cm.DT_INICIAL)) as dt_inicial,
+        date(max(cm.DT_FIM)) as dt_fim,
+        (select count(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(cm.DT_INICIAL)) and date(sa.`DATA`) <=date(max(cm.DT_FIM))) as total_procedimentos,
+        (select sum(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(cm.DT_INICIAL)) and date(sa.`DATA`) <=date(max(cm.DT_FIM))) as total_minutos
+        from CET_ME cm 
+        where MATRICULAMEMBRO = {$matricula}
+        group by
+        cm.IND_ME,
+        cm.ANO_CET,
+        cm.MATRICULAMEMBRO";
+
+        return DB::connection('mysql_sbahq')->select($sql);
+
+    }
+
+    public function getEstagios($matricula, $inicio, $fim){
+
+        $sql = "select
+        cc.MATRICULA as cet,
+        cc.HOSPSEDE as hospsede,
+        ce.matriculamembro as matricula,
+        ce.inicio as dt_inicio_me,
+        ce.fim as dt_fim_me,
+        ce.e1 as duracao,
+        ce.e2 as atos
+        from
+        Relcet.CET_ESTAGIOS ce join sbahq.CET_CET cc
+        on ce.MATRICULA = cc.MATRICULA
+        where ce.matriculamembro = {$matricula}
+        and ce.inicio >= date('{$inicio}')
+        and ce.fim  <= date('{$fim}')
+        order by ce.inicio";
+
+        return DB::connection('mysql_sbahq')->select($sql);
+
+    }
+
     public function getDadosLogbook($matricula, $indicadorME){
 
         $sql = "
@@ -112,7 +156,7 @@ class DadosAnestesicos extends Model
         ) t
         where
             (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) = $indicadorME
-        order by t.data_procedimento
+        order by t.data_procedimento limit 5
         ";
 
         $dadosLogbook = DB::connection('mysql_sbahq')->select($sql);

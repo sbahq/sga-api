@@ -7,6 +7,7 @@ use App\Domains\Services\DadosAnestesicosService;
 
 class DadosAnestesicosResponse
 {
+
     private $service;
 
     public function __construct()
@@ -14,8 +15,8 @@ class DadosAnestesicosResponse
         $this->service = new DadosAnestesicosService();
     }
 
-    public function getDadosLogbook($matricula){
-        return $this->service->getDadosLogbook($matricula);
+    public function getPeriodoME($matricula){
+        return $this->service->getPeriodoME($matricula);
     }
 
 }

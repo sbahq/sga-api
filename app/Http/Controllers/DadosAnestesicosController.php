@@ -15,8 +15,8 @@ class DadosAnestesicosController extends Controller
         $this->response = new DadosAnestesicosResponse();
     }
 
-    public function getDadosLogbook($matricula){
-        return $this->response->getDadosLogbook($matricula);
+    public function getPeriodoME($matricula){
+        return $this->response->getPeriodoME($matricula);
     }
 
 }

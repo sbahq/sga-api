@@ -14,8 +14,8 @@ class DadosAnestesicosService
         $this->repository = new DadosAnestesicosRepository();
     }
 
-    public function getDadosLogbook($matricula){
-        return $this->repository->getDadosLogbook($matricula);
+    public function getPeriodoME($matricula){
+        return $this->repository->getPeriodoME($matricula);
     }
 
 }
