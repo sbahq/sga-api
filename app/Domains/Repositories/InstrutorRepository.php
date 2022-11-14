@@ -31,6 +31,7 @@ class InstrutorRepository
             'regional' => $instrutor->regional,
             'ano_cet' => $instrutor->ano_cet,
             'matricula_cet' => $instrutor->matricula_cet,
+            'cet_id' => $instrutor->cet_id,
             'cet' => $instrutor->cet,
             'data_emissao_credencial' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_emissao_credencial,'Y-m-d'),
             'data_vencimento_credencial' => \App\Helpers\AppHelper::instance()->formatDate($instrutor->data_vencimento_credencial,'Y-m-d'),
@@ -73,6 +74,10 @@ class InstrutorRepository
 
     public function getInstrutoresCet($matriculaCET){
         return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
+    }
+
+    public function getInstrutor($matricula){
+        return $this->returnLista($this->model->getInstrutor($matricula));
     }
 
     public function getInstrutoresRegularesCET($matriculaCET){

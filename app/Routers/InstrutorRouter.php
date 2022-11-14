@@ -17,6 +17,7 @@ class InstrutorRouter
     {
         return function ($router) {
             Route::get('', [InstrutorController::class, 'getInstrutores']);
+            Route::get('/get-instrutor/{matricula}', [InstrutorController::class, 'getInstrutor']);
             Route::get('/get-instrutores-cet/{matricula_cet}', [InstrutorController::class, 'getInstrutoresCet']);
             Route::get('/get-instrutores-regulares-cet/{matricula_cet}', [InstrutorController::class, 'getInstrutoresRegularesCET']);            
             Route::get('/total-instrutores-regularizados-id/{cet_id}', [InstrutorController::class, 'getTotalInstrutoresCETById']);
