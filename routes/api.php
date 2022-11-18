@@ -31,6 +31,10 @@ Route::group([
     ], \App\Routers\SocioRouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'pessoa-sga'
+    ], \App\Routers\PessoaSGARouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'instrutor'
     ], \App\Routers\InstrutorRouter::instance()->router( $router ));
 
