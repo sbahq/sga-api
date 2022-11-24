@@ -19,4 +19,9 @@ class DadosAnestesicosController extends Controller
         return $this->response->getPeriodoME($matricula);
     }
 
+    public function getDadosIndicadorME(Request $request){
+        $data = $request->all();
+        return $this->response->getDadosIndicadorME($data['matricula'], $data['indicador-me']);
+    }
+
 }

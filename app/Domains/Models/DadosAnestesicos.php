@@ -43,17 +43,28 @@ class DadosAnestesicos extends Model
 
     public function getDadosIndicadorME($matricula, $indicadorME){
 
-        $sql = "select
-        cm.IND_ME as ind_me,
-        cm.MATRICULAMEMBRO,
-        date(min(cm.DT_INICIAL)) as dt_inicio_me,
-        date(max(cm.DT_FIM)) as dt_fim_me
-        from CET_ME cm 
-        where MATRICULAMEMBRO = {$matricula}
-        and cm.IND_ME = $indicadorME
-        group by
+        $sql = "
+        select
+        p.ID_PESSOA as id_pessoa,
+        s.MATRICULA as matricula,
+        p.NOME as nome,
+        p.CPF as cpf,
+        s.NASCI as data_nascimento,
+        cm.ANO_CET as ano_cet,
         cm.IND_ME,
-        cm.MATRICULAMEMBRO";
+        date(cm.DT_INICIAL) as data_inicio,
+        date(cm.DT_FIM) as data_fim,
+        cc.HOSPSEDE as nome_hospital_sede,
+        o.DESCRICAO as cet_nome
+        from
+        CET_ME cm join SECRET2 s
+        on s.MATRICULA = cm.MATRICULAMEMBRO join PESSOA p 
+        on p.ID_PESSOA = s.ID_PESSOA join CET_CET cc
+        on cc.MATRICULA = cm.MATRICULA join ORGAO o 
+        on o.ID_ORGAO = cc.ID_ORGAO
+        where cm.MATRICULAMEMBRO = {$matricula}
+        and cm.IND_ME = {$indicadorME}
+        ";
         
         return DB::connection('mysql_sbahq')->select($sql);
 

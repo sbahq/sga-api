@@ -17,7 +17,14 @@ class PessoaSGA extends Model
 
     public function getMembrosComissaoCET(){
 
-        $membrosComissaoCET = DB::connection('mysql_sbahq')->select("select * from vw_membros_comissao_cet");
+        $membrosComissaoCET = DB::connection('mysql_sbahq')->select("select * from vw_membros_comissao_cet where cargo <> 'PRESIDENTE' ");
+        return $membrosComissaoCET;
+
+    }
+
+    public function getPresidenteComissaoCET(){
+
+        $membrosComissaoCET = DB::connection('mysql_sbahq')->select("select * from vw_membros_comissao_cet where cargo = 'PRESIDENTE'");
         return $membrosComissaoCET;
 
     }

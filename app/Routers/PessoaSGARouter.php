@@ -18,6 +18,7 @@ class PessoaSGARouter
         return function ($router) {
             Route::get('/get-pessoa/{matricula}', [PessoaSGAController::class, 'getPessoaByMatricula']);
             Route::get('/membros-comissao-cet', [PessoaSGAController::class, 'getMembrosComissaoCET']);
+            Route::get('/presidente-comissao-cet', [PessoaSGAController::class, 'getPresidenteComissaoCET']);
         };
     }
 }

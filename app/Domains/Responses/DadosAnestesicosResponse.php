@@ -19,4 +19,8 @@ class DadosAnestesicosResponse
         return $this->service->getPeriodoME($matricula);
     }
 
+    public function getDadosIndicadorME($matricula, $indicadorME){
+        return $this->service->getDadosIndicadorME($matricula, $indicadorME);
+    }
+
 }

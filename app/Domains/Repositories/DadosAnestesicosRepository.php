@@ -15,6 +15,10 @@ class DadosAnestesicosRepository
         $this->validate = new Validation();
     }
 
+    public function getDadosIndicadorME($matricula, $indicadorME){
+        return $this->model->getDadosIndicadorME($matricula, $indicadorME);
+    }
+
     public function getPeriodoME($matricula)
     {
 

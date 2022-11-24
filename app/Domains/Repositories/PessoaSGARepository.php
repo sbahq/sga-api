@@ -87,4 +87,22 @@ class PessoaSGARepository
 
     }
 
+    public function getPresidenteComissaoCET(){
+        $pessoas = $this->model->getPresidenteComissaoCET();
+        $response = [];
+        $return = [];
+
+        if( count($pessoas) > 0 ){
+            foreach($pessoas as $pessoa){
+                array_push($return, $this->returnArrayPessoa($pessoa));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
 }

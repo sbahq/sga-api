@@ -18,7 +18,7 @@ class MedicoEspecializacao extends Model
 
     public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
 
-        $sql = "select * from vw_me_cet vmc where date(vmc.data_fim) <= date('2023-04-01') and vmc.matricula_cet = {$matriculaCET} order by vmc.nome";
+        $sql = "select * from vw_me_cet vmc where vmc.situacao = 'ME3/2022' and vmc.matricula_cet = {$matriculaCET} order by vmc.nome";
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
 
@@ -27,7 +27,7 @@ class MedicoEspecializacao extends Model
     public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
 
         $medicos = DB::connection('mysql_sbahq')->table('vw_me_cet')
-                                                ->whereRaw("date(data_fim)<=date('2023-04-01')")
+                                                ->where("situacao","ME3/2022")
                                                 ->where('matricula_cet', $matriculaCET)
                                                 ->where('nome', 'like', '%'. $nomeME .'%')
                                                 ->orderBy('nome')

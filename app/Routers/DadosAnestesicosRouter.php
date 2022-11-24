@@ -17,6 +17,7 @@ class DadosAnestesicosRouter
     {
         return function ($router) {
             Route::get('/get-periodo-me/{matricula}', [DadosAnestesicosController::class, 'getPeriodoME']);
+            Route::post('/get-periodo-indicador', [DadosAnestesicosController::class, 'getDadosIndicadorME']);
         };
     }
 }

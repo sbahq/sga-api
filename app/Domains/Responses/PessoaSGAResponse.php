@@ -21,5 +21,9 @@ class PessoaSGAResponse
         return $this->service->getMembrosComissaoCET();
     }
 
+    public function getPresidenteComissaoCET(){
+        return $this->service->getPresidenteComissaoCET();
+    }
+
 
 }

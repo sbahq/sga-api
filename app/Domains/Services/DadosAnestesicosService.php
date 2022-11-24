@@ -18,4 +18,8 @@ class DadosAnestesicosService
         return $this->repository->getPeriodoME($matricula);
     }
 
+    public function getDadosIndicadorME($matricula, $indicadorME){
+        return $this->repository->getDadosIndicadorME($matricula, $indicadorME);
+    }
+
 }
