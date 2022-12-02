@@ -25,5 +25,8 @@ class PessoaSGAResponse
         return $this->service->getPresidenteComissaoCET();
     }
 
+    public function getResponsaveisCertificadoSaida(){
+        return $this->service->getResponsaveisCertificadoSaida();
+    }
 
 }

@@ -20,6 +20,8 @@ class PessoaSGARepository
             'id_pessoa' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->id_pessoa),
             'matricula' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->matricula),
             'cargo' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->cargo),
+            'orgao' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->orgao),
+            'id_cargo' => $pessoa->id_cargo,
             'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->nome),
             'cpf' => $pessoa->cpf,
             'email' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->email),
@@ -103,6 +105,26 @@ class PessoaSGARepository
             $response = $this->validate->getErrorMessage($message);
         }
         return $response;
+    }
+
+    public function getResponsaveisCertificadoSaida(){
+
+        $pessoas = $this->model->getResponsaveisCertificadoSaida();
+        $response = [];
+        $return = [];
+
+        if( count($pessoas) > 0 ){
+            foreach($pessoas as $pessoa){
+                array_push($return, $this->returnArrayPessoa($pessoa));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+
     }
 
 }

@@ -74,19 +74,69 @@ class DadosAnestesicos extends Model
 
         $sql = "
         select
+        consulta.ind_me,
+        consulta.matriculamembro,
+        consulta.ano_cet,
+        consulta.dt_inicial,
+        consulta.dt_fim,
+        (select o.ID_ORGAO  from
+        CET_ME cm2 join CET_CET cc
+        on cm2.MATRICULA = cc.MATRICULA join ORGAO o
+        on o.ID_ORGAO = cc.ID_ORGAO
+        where cm2.MATRICULAMEMBRO = {$matricula} and cm2.IND_ME = consulta.ind_me and cm2.ANO_CET = consulta.ano_cet) as cet_id,
+        (select cm2.MATRICULA from CET_ME cm2 where cm2.IND_ME = consulta.ind_me and cm2.ANO_CET = consulta.ano_cet and cm2.MATRICULAMEMBRO = consulta.matriculamembro) as matricula_cet,
+        (select o.DESCRICAO from
+        CET_ME cm2 join CET_CET cc
+        on cm2.MATRICULA = cc.MATRICULA join ORGAO o
+        on o.ID_ORGAO = cc.ID_ORGAO
+        where cm2.MATRICULAMEMBRO = {$matricula} and cm2.IND_ME = consulta.ind_me and cm2.ANO_CET = consulta.ano_cet) as nome_cet,
+        (select cc.HOSPSEDE  from
+        CET_ME cm2 join CET_CET cc
+        on cm2.MATRICULA = cc.MATRICULA join ORGAO o
+        on o.ID_ORGAO = cc.ID_ORGAO
+        where cm2.MATRICULAMEMBRO = {$matricula} and cm2.IND_ME = consulta.ind_me and cm2.ANO_CET = consulta.ano_cet) as hospital_sede,
+        (select count(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(consulta.dt_inicial)) and date(sa.`DATA`) <=date(max(consulta.dt_fim))) as total_procedimentos,
+        (select sum(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(consulta.dt_inicial)) and date(sa.`DATA`) <=date(max(consulta.dt_fim))) as total_minutos,
+        (select
+        sum(ce.e1) as duracao
+        from
+        Relcet.CET_ESTAGIOS ce join sbahq.CET_CET cc
+        on ce.MATRICULA = cc.MATRICULA
+        where ce.matriculamembro = {$matricula}
+        and ce.ano_cet = consulta.ano_cet
+        and ce.inicio >= date(consulta.dt_inicial)
+        and ce.fim  <= date(consulta.dt_fim)
+        ) as horas_estagio,
+        (select
+        sum(ce.e2) as horas_estagio
+        from
+        Relcet.CET_ESTAGIOS ce join sbahq.CET_CET cc
+        on ce.MATRICULA = cc.MATRICULA
+        where ce.matriculamembro = {$matricula}
+        and ce.ano_cet = consulta.ano_cet
+        and ce.inicio >= date(consulta.dt_inicial)
+        and ce.fim  <= date(consulta.dt_fim)
+        ) as atos_estagio
+        from (
+        select
         cm.IND_ME as ind_me,
         cm.MATRICULAMEMBRO as matriculamembro,
-        cm.ANO_CET as ano_cet,
-        date(min(cm.DT_INICIAL)) as dt_inicial,
-        date(max(cm.DT_FIM)) as dt_fim,
-        (select count(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(cm.DT_INICIAL)) and date(sa.`DATA`) <=date(max(cm.DT_FIM))) as total_procedimentos,
-        (select sum(sa.duracao) from SGAP.SGAP_ANESTESIAS sa where sa.Matricula = {$matricula} and date(sa.`DATA`) >= date(min(cm.DT_INICIAL)) and date(sa.`DATA`) <=date(max(cm.DT_FIM))) as total_minutos
-        from CET_ME cm 
-        where MATRICULAMEMBRO = {$matricula}
+        (select max(cm1.ANO_CET) from CET_ME as cm1 where cm1.MATRICULAMEMBRO = {$matricula} and cm1.IND_ME = cm.IND_ME) as ano_cet,
+        date((select max(cm1.DT_INICIAL) from CET_ME as cm1 where cm1.MATRICULAMEMBRO = {$matricula} and cm1.IND_ME = cm.IND_ME)) as dt_inicial,
+        date((select max(cm1.DT_FIM) from CET_ME as cm1 where cm1.MATRICULAMEMBRO = {$matricula} and cm1.IND_ME = cm.IND_ME)) as dt_fim
+        from CET_ME cm
+        where cm.MATRICULAMEMBRO = {$matricula}
         group by
         cm.IND_ME,
-        cm.ANO_CET,
-        cm.MATRICULAMEMBRO";
+        cm.MATRICULAMEMBRO 
+        ) as consulta
+        group by
+        consulta.ind_me,
+        consulta.matriculamembro,
+        consulta.ano_cet,
+        consulta.dt_inicial,
+        consulta.dt_fim
+        ";
 
         return DB::connection('mysql_sbahq')->select($sql);
 
@@ -94,7 +144,8 @@ class DadosAnestesicos extends Model
 
     public function getEstagios($matricula, $inicio, $fim){
 
-        $sql = "select
+        $sql = "
+        select
         cc.MATRICULA as cet,
         cc.HOSPSEDE as hospsede,
         ce.matriculamembro as matricula,
@@ -108,7 +159,8 @@ class DadosAnestesicos extends Model
         where ce.matriculamembro = {$matricula}
         and ce.inicio >= date('{$inicio}')
         and ce.fim  <= date('{$fim}')
-        order by ce.inicio";
+        order by ce.inicio
+        ";
 
         return DB::connection('mysql_sbahq')->select($sql);
 
@@ -167,7 +219,7 @@ class DadosAnestesicos extends Model
         ) t
         where
             (select DISTINCT cm.IND_ME from sbahq.CET_ME cm where cm.MATRICULAMEMBRO = {$matricula} and t.data_procedimento BETWEEN cm.DT_INICIAL and cm.DT_FIM ) = $indicadorME
-        order by t.data_procedimento limit 5
+        order by t.data_procedimento
         ";
 
         $dadosLogbook = DB::connection('mysql_sbahq')->select($sql);

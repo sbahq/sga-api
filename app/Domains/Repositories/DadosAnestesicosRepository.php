@@ -45,7 +45,14 @@ class DadosAnestesicosRepository
                 'fim_formatado' => $fim->format('d/m/Y'),
                 'total_procedimentos' => $atos + $periodo->total_procedimentos,
                 'total_minutos' => $periodo->total_minutos + ($duracao*60),
-                'total_horas' => floor(($periodo->total_minutos+($duracao*60)) / 60)
+                'total_horas' => floor(($periodo->total_minutos+($duracao*60)) / 60),
+                'matriculamembro' => $periodo->matriculamembro,
+                'cet_id' => $periodo->cet_id,
+                'matricula_cet' => $periodo->matricula_cet,
+                'nome_cet'  => $periodo->nome_cet,
+                'hospital_sede'  => $periodo->hospital_sede,
+                'horas_estagio'  => $periodo->horas_estagio,
+                'atos_estagio'  => $periodo->atos_estagio,
             );
         }
 
