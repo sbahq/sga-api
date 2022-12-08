@@ -23,9 +23,12 @@ class PessoaSGARepository
             'orgao' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->orgao),
             'id_cargo' => $pessoa->id_cargo,
             'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->nome),
+            'nome_profissional' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->nome_profissional),
             'cpf' => $pessoa->cpf,
             'email' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->email),
             'celular' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->celular),
+            'telefone1' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->telefone1),
+            'telefone2' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->telefone2),
             'sexo' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->sexo),
             'tratamento' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->tratamento),
             'prezado' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->prezado),
@@ -39,18 +42,24 @@ class PessoaSGARepository
             'categoria_anterior_1_nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->categoria_anterior_1_nome),
             'categoria_anterior_2' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->categoria_anterior_2),
             'categoria_anterior_2_nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->categoria_anterior_2_nome),
-            'situacao' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->situacao),
+            'situacao' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->situacao ),
+            'faculdade' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->faculdade ),
+            'ano_formatura' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->ano_formatura ),
+            'local_trabalho' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->local_trabalho ),
+            'uf_local_trabalho' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->uf_local_trabalho ),
+            'cidade_local_trabalho' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull( $pessoa->cidade_local_trabalho ),
             'pais' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->pais),
             'uf' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->uf),
             'municipio' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->municipio),
             'endereco' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->endereco),
             'complemento' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->complemento),
+            'bairro' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->bairro),
+            'caixa_postal' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->caixa_postal),
             'cep' => $pessoa->cep,
         );
     }
 
     public function getPessoaByMatricula($matricula){
-
         $pessoas = $this->model->getPessoaByMatricula($matricula);
         $response = [];
         $return = [];
