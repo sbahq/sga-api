@@ -16,6 +16,11 @@ class InstrutorRepository
     }
 
     private function returnArrayInstrutor($instrutor){
+        $instrutorOK = 1;
+        if( $instrutor->status_credencial_vencida == 1 ) $instrutorOK = 0;
+        if( $instrutor->anuidade_sba_vencida_status == 1 ) $instrutorOK = 0;
+        if( $instrutor->anuidade_regional_vencida_status == 1 ) $instrutorOK = 0;
+
         return array(
             'id_pessoa' => $instrutor->id_pessoa,
             'matricula' => $instrutor->matricula,
@@ -47,7 +52,8 @@ class InstrutorRepository
             'dias_restantes_vencimento_sba' => $instrutor->dias_restantes_vencimento_sba,
             'anuidade_regional_vencida_status' => $instrutor->anuidade_regional_vencida_status,
             'anuidade_regional_vencida_status_descricao' => $instrutor->anuidade_regional_vencida_status_descricao,
-            'dias_restantes_vencimento_regional' => $instrutor->dias_restantes_vencimento_regional,            
+            'dias_restantes_vencimento_regional' => $instrutor->dias_restantes_vencimento_regional,  
+            'instrutor_ok' => $instrutorOK          
         );
     }
 
