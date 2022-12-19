@@ -32,6 +32,8 @@ class MedicoEspecializacaoRepository
             'indicador_me' => $medico->indicador_me,
             'data_inicio' => \App\Helpers\AppHelper::instance()->formatDate($medico->data_inicio,'Y-m-d H:i:s', 'Y-m-d'),
             'data_fim' => \App\Helpers\AppHelper::instance()->formatDate($medico->data_fim,'Y-m-d H:i:s', 'Y-m-d'),
+            'data_inicio_formatada' => \App\Helpers\AppHelper::instance()->formatDate($medico->data_inicio,'Y-m-d H:i:s', 'd/m/Y'),
+            'data_fim_formatada' => \App\Helpers\AppHelper::instance()->formatDate($medico->data_fim,'Y-m-d H:i:s', 'd/m/Y'),
             'matricula_cet' => $medico->matricula_cet,
             'cet' => $medico->cet,
             'cet_id' => $medico->cet_id,
