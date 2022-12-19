@@ -18,8 +18,12 @@ class MedicoEspecializacaoController extends Controller
         return $this->response->getMedicosEspecializacaoCET($matriculaCET);
     }
 
-    public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
+    public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET = null){
         return $this->response->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET);
+    }
+
+    public function getTodosMedicosEspecializacaoFinalizadoPeriodoME(Request $request){
+        return $this->response->getTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
     }
 
     public function getMedicosEspecializacao(){

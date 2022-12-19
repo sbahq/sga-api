@@ -23,6 +23,14 @@ class MedicoEspecializacaoService
         return $this->repository->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET);
     }
 
+    public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        return $this->repository->getTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
+    }
+
+    public function countTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        return $this->repository->countTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
+    }
+
     public function getMedicosEspecializacao(){
         return $this->repository->getMedicosEspecializacao();
     }

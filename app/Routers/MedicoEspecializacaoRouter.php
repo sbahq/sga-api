@@ -17,7 +17,8 @@ class MedicoEspecializacaoRouter
     {
         return function ($router) {
             Route::get('/{matricula_cet}', [MedicoEspecializacaoController::class, 'getMedicosEspecializacaoCET']);
-            Route::get('/finalizado-periodo-me/{matricula_cet}', [MedicoEspecializacaoController::class, 'getMedicosEspecializacaoFinalizadoPeriodoME']);
+            Route::get('/finalizado-periodo-me/{matricula_cet?}', [MedicoEspecializacaoController::class, 'getMedicosEspecializacaoFinalizadoPeriodoME']);
+            Route::post('/todos/finalizado-periodo-me', [MedicoEspecializacaoController::class, 'getTodosMedicosEspecializacaoFinalizadoPeriodoME']);
             Route::post('/finalizado-periodo-me', [MedicoEspecializacaoController::class, 'getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome']);
             Route::get('', [MedicoEspecializacaoController::class, 'getMedicosEspecializacao']);
             Route::get('/medicos-especializacao-com-pendencias/{matricula_cet}/{days_to_expiration}', [MedicoEspecializacaoController::class, 'getMedicosEspecializacaoComPendencias']);

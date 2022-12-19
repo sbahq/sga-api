@@ -24,6 +24,40 @@ class MedicoEspecializacao extends Model
 
     }
 
+    public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($requestAll){
+        
+        $limit = ( isset($requestAll['limit']) ? $requestAll['limit'] : 10 );
+        $offSet = ( isset($requestAll['offset']) ? $requestAll['offset'] : 0 );
+
+        $sql = "select * from vw_me_cet vmc where vmc.situacao = 'ME3/2022' ";
+        if( isset($requestAll['cet_id']) )
+            if( $requestAll['cet_id'] != '' ) $sql.= " and vmc.cet_id = " . $requestAll['cet_id'];
+        
+        if( isset($requestAll['nome']) )
+            if( trim($requestAll['nome']) != '' ) $sql.= " and vmc.nome like '%" . $requestAll['nome']."%'";
+
+        $sql.=" order by vmc.cet, vmc.nome limit {$limit} offset {$offSet}";
+        
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
+        return $medicos;
+
+    }
+
+    public function countTodosMedicosEspecializacaoFinalizadoPeriodoME($requestAll){
+
+        $sql = "select count(*) as total_medicos from vw_me_cet vmc where vmc.situacao = 'ME3/2022'";
+
+        if( isset($requestAll['cet_id']) )
+            if( $requestAll['cet_id'] != '' ) $sql.= " and vmc.cet_id = " . $requestAll['cet_id'];
+        
+        if( isset($requestAll['nome']) )
+            if( trim($requestAll['nome']) != '' ) $sql.= " and vmc.nome like '%" . $requestAll['nome']."%'";
+
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
+        return $medicos;
+
+    }
+
     public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
 
         $medicos = DB::connection('mysql_sbahq')->table('vw_me_cet')

@@ -22,6 +22,19 @@ class MedicoEspecializacaoResponse
         return $this->service->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET);
     }
 
+    public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        $medicos = $this->service->getTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
+        $countMedicos = $this->service->countTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
+        return Array(
+            'medicos' => $medicos,
+            'count' => $countMedicos
+        );
+    }
+
+    public function countTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        return $this->service->countTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
+    }
+
     public function getMedicosEspecializacao(){
         return $this->service->getMedicosEspecializacao();
     }

@@ -34,6 +34,7 @@ class MedicoEspecializacaoRepository
             'data_fim' => \App\Helpers\AppHelper::instance()->formatDate($medico->data_fim,'Y-m-d H:i:s', 'Y-m-d'),
             'matricula_cet' => $medico->matricula_cet,
             'cet' => $medico->cet,
+            'cet_id' => $medico->cet_id,
             'ano_sba' => $medico->ano_sba,
             'ano_regional' => $medico->ano_regional,
             'data_proximo_vencimento_sba' => $medico->data_proximo_vencimento_sba,
@@ -70,6 +71,14 @@ class MedicoEspecializacaoRepository
 
     public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
         return $this->returnLista($this->model->getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET));
+    }
+
+    public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        return $this->returnLista($this->model->getTodosMedicosEspecializacaoFinalizadoPeriodoME($request));
+    }
+
+    public function countTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        return $this->model->countTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
     }
 
     public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
