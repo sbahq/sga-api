@@ -24,6 +24,10 @@ class InstrutorController extends Controller
         return $this->response->getInstrutoresCet($matriculaCET);
     }
 
+    public function getInstrutoresCETComTSA($matriculaCET){
+        return $this->response->getInstrutoresCETComTSA($matriculaCET);
+    }
+
     public function getInstrutor($matricula){
         return $this->response->getInstrutor($matricula);
     }

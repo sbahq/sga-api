@@ -32,6 +32,7 @@ class InstrutorRepository
             'prezado' => $instrutor->prezado,
             'email' => $instrutor->email,
             'celular' => $instrutor->celular,
+            'tsa' => $instrutor->tsa,
             'tipo' => $instrutor->tipo,
             'regional' => $instrutor->regional,
             'ano_cet' => $instrutor->ano_cet,
@@ -80,6 +81,10 @@ class InstrutorRepository
 
     public function getInstrutoresCet($matriculaCET){
         return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
+    }
+
+    public function getInstrutoresCETComTSA($matriculaCET){
+        return $this->returnLista($this->model->getInstrutoresCETComTSA($matriculaCET));
     }
 
     public function getInstrutor($matricula){

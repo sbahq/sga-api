@@ -40,6 +40,14 @@ class Instrutor extends Model
 
     }
 
+    public function getInstrutoresCETComTSA($matriculaCET){
+
+        $sql = "select * from vw_instrutores_vagas viv where viv.tsa = 'S' and  viv.matricula_cet = {$matriculaCET} order by nome";
+        $instrutores = DB::connection('mysql_sbahq')->select($sql);
+        return $instrutores;
+
+    }
+
     public function getInstrutoresRegularesCET($matriculaCET){
 
         $sql ="select * from vw_instrutores_vagas viv where ";

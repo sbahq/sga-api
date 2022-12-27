@@ -17,6 +17,10 @@ class InstrutorResponse
         return $this->service->getInstrutoresCet($matriculaCET);
     }
 
+    public function getInstrutoresCETComTSA($matriculaCET){
+        return $this->service->getInstrutoresCETComTSA($matriculaCET);
+    }
+
     public function getInstrutor($matricula){
         return $this->service->getInstrutor($matricula);
     }
