@@ -114,4 +114,8 @@ class InstrutorRepository
         return $this->returnLista($this->model->getInstrutoresComPendencias($matriculaCET, $daysToExpiration));
     }
 
+    public function getInstrutoresComPendenciasComTSA($matriculaCET, $daysToExpiration){
+        return $this->returnLista($this->model->getInstrutoresComPendenciasComTSA($matriculaCET, $daysToExpiration));
+    }
+
 }

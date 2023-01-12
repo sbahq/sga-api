@@ -32,6 +32,14 @@ class Instrutor extends Model
 
     }
 
+    public function getInstrutoresComPendenciasComTSA($matriculaCET, $daysToExpiration){
+
+        $sql = "select * from vw_instrutores_vagas viv where viv.tsa = 'S' and tipo <> 'RESPONSAVEL' and viv.matricula_cet = {$matriculaCET} and (dias_restantes_vencimento_credencial = $daysToExpiration or dias_restantes_vencimento_sba = $daysToExpiration or dias_restantes_vencimento_regional = $daysToExpiration) order by nome";
+        $instrutores = DB::connection('mysql_sbahq')->select($sql);
+        return $instrutores;
+
+    }
+
     public function getInstrutoresCET($matriculaCET){
 
         $sql = "select * from vw_instrutores_vagas viv where viv.matricula_cet = {$matriculaCET} order by nome";
@@ -42,7 +50,7 @@ class Instrutor extends Model
 
     public function getInstrutoresCETComTSA($matriculaCET){
 
-        $sql = "select * from vw_instrutores_vagas viv where viv.tsa = 'S' and  viv.matricula_cet = {$matriculaCET} order by nome";
+        $sql = "select * from vw_instrutores_vagas viv where viv.tsa = 'S' and viv.matricula_cet = {$matriculaCET} order by nome";
         $instrutores = DB::connection('mysql_sbahq')->select($sql);
         return $instrutores;
 

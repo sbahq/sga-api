@@ -41,7 +41,7 @@ class VagaResponse
         }
         
         $totalMedicosEmEspecializacao = isset($medicosEmEspecializacao['items']) ? count($medicosEmEspecializacao['items']) : 0;
-        $instrutores = $this->instrutorService->getInstrutoresCet($matriculaCET);
+        $instrutores = $this->instrutorService->getInstrutoresCETComTSA($matriculaCET);
         $totalInstrutoresRegularizados = 0;
         $totalInstrutoresNaoRegularizados = 0;
         $dataReturn = [];
