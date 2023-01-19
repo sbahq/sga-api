@@ -26,6 +26,10 @@ class InstrutorService
         return $this->repository->getInstrutoresCETComTSA($matriculaCET);
     }
 
+    public function getInstrutoresComTSA(){
+        return $this->repository->getInstrutoresComTSA();
+    }
+
     public function getInstrutor($matricula){
         return $this->repository->getInstrutor($matricula);
     }

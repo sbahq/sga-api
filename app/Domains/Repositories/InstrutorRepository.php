@@ -87,6 +87,10 @@ class InstrutorRepository
         return $this->returnLista($this->model->getInstrutoresCETComTSA($matriculaCET));
     }
 
+    public function getInstrutoresComTSA(){
+        return $this->returnLista($this->model->getInstrutoresComTSA());
+    }
+
     public function getInstrutor($matricula){
         return $this->returnLista($this->model->getInstrutor($matricula));
     }
