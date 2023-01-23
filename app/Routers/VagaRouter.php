@@ -17,6 +17,7 @@ class VagaRouter
     {
         return function ($router) {
             Route::get('dados-vaga/{matricula_cet}', [VagaController::class, 'dadosVaga']);
+            Route::get('dados-vaga-cet/{cetid?}', [VagaController::class, 'getVagasCet']);
         };
     }
 

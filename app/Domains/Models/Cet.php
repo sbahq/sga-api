@@ -25,4 +25,13 @@ class Cet extends Model
         return $cets;
     }
 
+    public function getVagasCet($cetid = null){
+
+        $sql = "select * from vw_cet_vaga ";
+        if( !is_null($cetid) ) $sql.=" where id = {$cetid}";
+        $cets = DB::connection('mysql_sbahq')->select($sql);
+        return $cets;
+
+    }
+
 }

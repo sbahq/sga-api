@@ -21,4 +21,8 @@ class CetService
         return $this->repository->getCet($id);
     }
 
+    public function getVagasCet($cetid = null){
+        return $this->repository->getVagasCet($cetid);
+    }
+
 }

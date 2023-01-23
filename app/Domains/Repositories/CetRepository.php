@@ -30,6 +30,20 @@ class CetRepository
         );
     }
 
+    private function returnArrayCetVaga($cet){
+        return array(
+            'id' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($cet->id),
+            'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($cet->nome),
+            'propostas_andamento' => $cet->propostas_andamento,
+            'medicos_especializacao' => $cet->medicos_especializacao,
+            'instrutores_com_tsa' => $cet->instrutores_com_tsa,
+            'instrutores_regulares' => $cet->instrutores_regulares,
+            'instrutores_irregulares' => $cet->instrutores_irregulares,
+            'vagas_disponiveis' => $cet->vagas_disponiveis,
+            'bloqueado' => $cet->bloqueado,
+        );
+    }
+
     public function getCets(){
         $cets = $this->model->getCets();
         $response = [];
@@ -56,6 +70,25 @@ class CetRepository
         if( count($cets) > 0 ){
             foreach($cets as $cet){
                 array_push($return, $this->returnArrayCet($cet));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+
+    public function getVagasCet($cetid = null){
+        $cets = $this->model->getVagasCet($cetid);
+        $response = [];
+        $return = [];
+
+        if( count($cets) > 0 ){
+            foreach($cets as $cet){
+                array_push($return, $this->returnArrayCetVaga($cet));
             }
             $response = $this->validate->getSuccessMessage();
             $response['items'] = $return;

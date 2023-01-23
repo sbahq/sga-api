@@ -18,4 +18,8 @@ class VagaController extends Controller
         return  $this->response->dadosVaga($matriculaCET);
     }
 
+    public function getVagasCet($cetid = null){
+        return $this->response->getVagasCet($cetid);
+    }
+
 }

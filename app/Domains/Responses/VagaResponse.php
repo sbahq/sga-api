@@ -3,6 +3,7 @@
 namespace App\Domains\Responses;
 
 use App\Domains\Services\InstrutorService;
+use App\Domains\Services\CetService;
 use App\Domains\Services\MedicoEspecializacaoService;
 use Illuminate\Support\Facades\Http;
 
@@ -10,11 +11,17 @@ class VagaResponse
 {
     private $instrutorService;
     private $medicoEspecializacaoService;
+    private $cetService;
 
     public function __construct()
     {
         $this->instrutorService = new InstrutorService();
         $this->medicoEspecializacaoService = new MedicoEspecializacaoService();
+        $this->cetService = new CetService();
+    }
+
+    public function getVagasCet($cetid = null){
+        return $this->cetService->getVagasCet($cetid);
     }
 
     public function dadosVaga($matriculaCET){
