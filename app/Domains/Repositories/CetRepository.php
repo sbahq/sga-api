@@ -33,9 +33,13 @@ class CetRepository
     private function returnArrayCetVaga($cet){
         return array(
             'id' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($cet->id),
+            'matricula' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($cet->matricula),
             'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($cet->nome),
             'propostas_andamento' => $cet->propostas_andamento,
             'medicos_especializacao' => $cet->medicos_especializacao,
+            'medicos_especializacao_saida' => $cet->medicos_especializacao_saida,
+            'medicos_especializacao_primeira_saida' => $cet->medicos_especializacao_primeira_saida,
+            'medicos_especializacao_ultima_saida' => $cet->medicos_especializacao_ultima_saida,
             'instrutores_com_tsa' => $cet->instrutores_com_tsa,
             'instrutores_regulares' => $cet->instrutores_regulares,
             'instrutores_irregulares' => $cet->instrutores_irregulares,

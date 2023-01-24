@@ -29,6 +29,7 @@ class Cet extends Model
 
         $sql = "select * from vw_cet_vaga ";
         if( !is_null($cetid) ) $sql.=" where id = {$cetid}";
+        $sql.=" order by vagas_disponiveis asc, nome desc";
         $cets = DB::connection('mysql_sbahq')->select($sql);
         return $cets;
 
