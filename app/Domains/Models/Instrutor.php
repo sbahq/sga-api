@@ -18,7 +18,7 @@ class Instrutor extends Model
 
     public function getResponsaveisCET(){
 
-        $sql = "select * from vw_instrutores_vagas viv where tipo = 'RESPONSAVEL' order by nome limit 2";
+        $sql = "select * from vw_instrutores_vagas viv where tipo = 'RESPONSAVEL' order by nome";
         $instrutores = DB::connection('mysql_sbahq')->select($sql);
         return $instrutores;
 
