@@ -18,7 +18,7 @@ class MedicoEspecializacao extends Model
 
     public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
 
-        $sql = "select * from vw_me_cet vmc where vmc.situacao = 'ME3/2022' and vmc.matricula_cet = {$matriculaCET} order by vmc.data_fim desc, vmc.nome";
+        $sql = "select * from vw_me_cet vmc where lower(vmc.situacao) = 'desligado falta ce' and year(vmc.data_fim) = year(now()) and vmc.indicador_me = 3 and vmc.matricula_cet = {$matriculaCET} order by vmc.data_fim desc, vmc.nome";
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
 
@@ -29,7 +29,7 @@ class MedicoEspecializacao extends Model
         $limit = ( isset($requestAll['limit']) ? $requestAll['limit'] : 10 );
         $offSet = ( isset($requestAll['offset']) ? $requestAll['offset'] : 0 );
 
-        $sql = "select * from vw_me_cet vmc where vmc.situacao = 'ME3/2022' ";
+        $sql = "select * from vw_me_cet vmc where lower(vmc.situacao) = 'desligado falta ce' and vmc.indicador_me = 3 ";
         if( isset($requestAll['cet_id']) )
             if( $requestAll['cet_id'] != '' ) $sql.= " and vmc.cet_id = " . $requestAll['cet_id'];
         
@@ -37,6 +37,8 @@ class MedicoEspecializacao extends Model
             if( trim($requestAll['nome']) != '' ) $sql.= " and vmc.nome like '%" . $requestAll['nome']."%'";
 
         $sql.=" order by vmc.cet, vmc.nome limit {$limit} offset {$offSet}";
+
+        return $sql;
         
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
@@ -45,7 +47,7 @@ class MedicoEspecializacao extends Model
 
     public function countTodosMedicosEspecializacaoFinalizadoPeriodoME($requestAll){
 
-        $sql = "select count(*) as total_medicos from vw_me_cet vmc where vmc.situacao = 'ME3/2022'";
+        $sql = "select count(*) as total_medicos from vw_me_cet vmc where lower(vmc.situacao) = 'desligado falta ce' and vmc.indicador_me = 3 ";
 
         if( isset($requestAll['cet_id']) )
             if( $requestAll['cet_id'] != '' ) $sql.= " and vmc.cet_id = " . $requestAll['cet_id'];
@@ -61,7 +63,8 @@ class MedicoEspecializacao extends Model
     public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
 
         $medicos = DB::connection('mysql_sbahq')->table('vw_me_cet')
-                                                ->where("situacao","ME3/2022")
+                                                ->where("lower(situacao)","desligado falta ce")
+                                                ->where("indicador_me","3")
                                                 ->where('matricula_cet', $matriculaCET)
                                                 ->where('nome', 'like', '%'. $nomeME .'%')
                                                 ->orderBy('data_fim desc')
