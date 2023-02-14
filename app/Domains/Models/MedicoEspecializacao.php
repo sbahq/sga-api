@@ -10,7 +10,14 @@ class MedicoEspecializacao extends Model
 
     public function getMedicosEspecializacaoCET($matriculaCET){
 
-        $sql = "select * from vw_me_cet vmc where vmc.matricula_cet = {$matriculaCET} order by vmc.nome";
+        $sql = "
+        select * from vw_me_cet vmc
+        where
+        vmc.matricula_cet = {$matriculaCET}
+        and vmc.situacao LIKE 'ME%'
+        and vmc.indicador_me = 1
+        order by vmc.nome
+        ";
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
 
@@ -37,8 +44,6 @@ class MedicoEspecializacao extends Model
             if( trim($requestAll['nome']) != '' ) $sql.= " and vmc.nome like '%" . $requestAll['nome']."%'";
 
         $sql.=" order by vmc.cet, vmc.nome limit {$limit} offset {$offSet}";
-
-        return $sql;
         
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;

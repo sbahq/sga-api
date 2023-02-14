@@ -23,6 +23,7 @@ class MedicoEspecializacaoResponse
     }
 
     public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($request){
+        
         $medicos = $this->service->getTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
         $countMedicos = $this->service->countTodosMedicosEspecializacaoFinalizadoPeriodoME($request);
         return Array(
