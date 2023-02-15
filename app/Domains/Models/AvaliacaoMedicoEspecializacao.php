@@ -33,7 +33,7 @@ class AvaliacaoMedicoEspecializacao extends Model
         $sql.= "end as nota_pn ";
         $sql.= "from Relcet.CET_AVALIACOES_TRIM cat ";
         $sql.= "where cat.matriculamembro = {$matricula} ";
-        $sql.= "and exists (select * from vw_me_cet vmc where vmc.matricula = {$matricula} and vmc.ano_cet = cat.ano_ce) ";
+        $sql.= "and exists (select * from vw_me_cet vmc where vmc.matricula =  {$matricula} and vmc.ano_cet = cat.ano_cet) ";
         $sql.= "order by cat.ano_cet";
         $avaliacoes = DB::connection('mysql_sbahq')->select($sql);
         return $avaliacoes;
