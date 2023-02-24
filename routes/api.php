@@ -35,6 +35,11 @@ Route::group([
     ], \App\Routers\PessoaSGARouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'nivel-programa-teorico'
+    ], \App\Routers\NivelProgramaTeoricoRouter::instance()->router( $router ));
+
+
+    Route::group([
         'prefix' => 'instrutor'
     ], \App\Routers\InstrutorRouter::instance()->router( $router ));
 
