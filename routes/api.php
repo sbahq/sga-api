@@ -35,6 +35,10 @@ Route::group([
     ], \App\Routers\PessoaSGARouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'ponto'
+    ], \App\Routers\PontoRouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'programa-teorico'
     ], \App\Routers\ProgramaTeoricoRouter::instance()->router( $router ));
 
