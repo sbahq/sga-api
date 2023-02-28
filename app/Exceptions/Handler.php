@@ -36,6 +36,7 @@ class Handler extends ExceptionHandler
     ];
 
     private function showMessage($e, $message, $request){
+
         if( isset($request['show-detail-error']) )
             return ['message' => array(
                 'line' => $e->getLine(),
@@ -44,6 +45,7 @@ class Handler extends ExceptionHandler
             )];
         else
             return ['message' => $message];
+
     }
 
     /**
