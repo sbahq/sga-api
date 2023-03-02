@@ -15,7 +15,7 @@ class MedicoEspecializacao extends Model
         where
         vmc.matricula_cet = {$matriculaCET}
         and vmc.situacao LIKE 'ME%'
-        and vmc.indicador_me = 1
+        and vmc.indicador_me = (select max(v.indicador_me) from vw_me_cet v where v.matricula = vmc.matricula) 
         order by vmc.nome
         ";
         $medicos = DB::connection('mysql_sbahq')->select($sql);
