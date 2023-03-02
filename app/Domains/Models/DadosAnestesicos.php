@@ -157,8 +157,7 @@ class DadosAnestesicos extends Model
         Relcet.CET_ESTAGIOS ce join sbahq.CET_CET cc
         on ce.MATRICULA = cc.MATRICULA
         where ce.matriculamembro = {$matricula}
-        and ce.inicio >= date('{$inicio}')
-        and ce.fim  <= date('{$fim}')
+        and ce.ano_cet = year(date('{$inicio}'))
         order by ce.inicio
         ";
 
