@@ -79,10 +79,16 @@ class MedicoEspecializacao extends Model
     }
 
     public function getMedicoEspecializacao($matricula){
-        $medicos = DB::connection('mysql_sbahq')->table('vw_me_cet')
-                                                ->where('matricula', $matricula)
-                                                ->get();
+
+        $sql = "select * from vw_me_cet vmc
+        where
+        vmc.matricula = {$matricula}
+        and vmc.indicador_me = (select max(v.indicador_me) from vw_me_cet v where v.matricula = vmc.matricula) 
+        order by vmc.nome";
+
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
+
     }
 
     public function getMedicosEspecializacao(){
