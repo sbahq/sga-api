@@ -9,7 +9,7 @@ class PontoInstrutor extends Model
 {
 
     public function getPontosInstrutor($matricula){
-        $pontosInstrutor = DB::connection('mysql_sbahq')->select("select * from pontos_instrutor where {$matricula}");
+        $pontosInstrutor = DB::connection('mysql_sbahq')->select("select * from pontos_instrutor where matricula = {$matricula}");
         return $pontosInstrutor;
     }
 
