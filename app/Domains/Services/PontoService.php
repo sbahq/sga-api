@@ -2,8 +2,7 @@
 
 namespace App\Domains\Services;
 
-use App\Domains\Repositories\PontosRepository;
-
+use App\Domains\Repositories\PontoRepository;
 
 class PontoService
 {
@@ -11,7 +10,7 @@ class PontoService
 
     public function __construct()
     {
-        $this->repository = new PontosRepository();
+        $this->repository = new PontoRepository();
     }
 
     public function getPontos(){

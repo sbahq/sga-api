@@ -6,7 +6,7 @@ use App\Domains\Models\Ponto;
 use App\Domains\Validations\Validation;
 use App\Exceptions\CustomException;
 
-class PontosRepository
+class PontoRepository
 {
     private $model;
     public function __construct()
