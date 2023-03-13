@@ -18,4 +18,8 @@ class PontoInstrutorController extends Controller
         return $this->response->getPontosInstrutor($matricula);
     }
 
+    public function savePontosInstrutor(Request $request){
+        return $request;
+    }
+
 }

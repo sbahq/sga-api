@@ -17,6 +17,8 @@ class PontoInstrutorRouter
     {
         return function ($router) {
             Route::get('/get-pontos-instrutores/{matricula}', [PontoInstrutorController::class, 'getPontosInstrutor']);
+            Route::post('/save-pontos', [PontoInstrutorController::class, 'savePontosInstrutor']);
+            
         };
     }
 }
