@@ -18,4 +18,8 @@ class PontoInstrutorService
         return $this->repository->getPontosInstrutor($matricula);
     }
 
+    public function savePontosInstrutor($request){
+        return $this->repository->savePontosInstrutor($request);
+    }
+
 }

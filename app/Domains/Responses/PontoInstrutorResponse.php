@@ -18,4 +18,8 @@ class PontoInstrutorResponse
         return $this->service->getPontosInstrutor($matricula);
     }
 
+    public function savePontosInstrutor($request){
+        return $this->service->savePontosInstrutor($request);
+    }
+
 }
