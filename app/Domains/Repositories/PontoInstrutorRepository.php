@@ -52,7 +52,7 @@ class PontoInstrutorRepository
                 'matricula' => $data['instrutor']
             );
         }
-        return $dataSave;
+        return $this->model->savePontosInstrutor($dataSave);
     }
 
 }
