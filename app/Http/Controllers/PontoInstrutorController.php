@@ -19,8 +19,7 @@ class PontoInstrutorController extends Controller
     }
 
     public function savePontosInstrutor(Request $request){
-        $data = $request->all();
-        print_r(count($data['ponto[]']));
+        return $data = $request->all();
     }
 
 }
