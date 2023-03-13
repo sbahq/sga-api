@@ -15,7 +15,7 @@ class PontoInstrutor extends Model
 
     public function savePontosInstrutor($dataSave){
 
-        return DB::connection('mysql_sbahq')->insert($dataSave);
+        return DB::connection('mysql_sbahq')->table('pontos_instrutor')->insert($dataSave);
 
     }
 
