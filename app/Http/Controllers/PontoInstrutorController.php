@@ -19,7 +19,8 @@ class PontoInstrutorController extends Controller
     }
 
     public function savePontosInstrutor(Request $request){
-        return ['Ok'];
+        $data = $request->all();
+        return [$data['instrutor']];
     }
 
 }
