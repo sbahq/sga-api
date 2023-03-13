@@ -48,8 +48,8 @@ class PontoInstrutorRepository
         $dataSave = [];
         for($i=0;($i<count($pontos)-1);$i++){
             $dataSave[] = Array(
-                'instrutor' => $data['instrutor'],
-                'ponto' => $pontos[$i]
+                'ponto_id' => $pontos[$i],
+                'matricula' => $data['instrutor']
             );
         }
         return $dataSave;
