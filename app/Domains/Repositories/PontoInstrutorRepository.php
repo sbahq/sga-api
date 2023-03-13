@@ -45,7 +45,14 @@ class PontoInstrutorRepository
     public function savePontosInstrutor($request){
         $data = $request->all();
         $pontos = explode(',', $data['pontos']); 
-        return $pontos;
+        $dataSave = [];
+        for($i=0;($i<count($pontos)-1);$i++){
+            $dataSave[] = Array(
+                'instrutor' => $data['instrutor'],
+                'ponto' => $pontos[$i]
+            );
+        }
+        return $dataSave;
     }
 
 }
