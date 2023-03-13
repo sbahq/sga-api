@@ -20,7 +20,11 @@ class PontoInstrutorController extends Controller
 
     public function savePontosInstrutor(Request $request){
         $data = $request->all();
-        return response()->json($data, 200);
+        $arrayPonto = [];
+        foreach($data['ponto'] as $ponto){
+            $arrayPonto[] = $ponto;
+        }
+        return $arrayPonto;
     }
 
 }
