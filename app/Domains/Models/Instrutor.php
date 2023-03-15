@@ -16,6 +16,20 @@ class Instrutor extends Model
 
     }
 
+    public function getInstrutoresPontoTalento($ponto){
+        $sql = "
+        select
+        viv.*
+        from
+        pontos_instrutor poi join vw_instrutores_vagas viv 
+        on poi.matricula = viv.matricula
+        where
+        poi.ponto_id = {$ponto}
+        ";
+        $pontosInstrutor = DB::connection('mysql_sbahq')->select($sql);
+        return $pontosInstrutor;
+    }
+
     public function getResponsaveisCET(){
 
         $sql = "select * from vw_instrutores_vagas viv where tipo = 'RESPONSAVEL' order by nome";

@@ -79,6 +79,10 @@ class InstrutorRepository
         return $this->returnLista($this->model->getInstrutores());
     }
 
+    public function getInstrutoresPontoTalento($ponto){
+        return $this->returnLista($this->model->getInstrutoresPontoTalento($ponto));
+    }
+
     public function getInstrutoresCet($matriculaCET){
         return $this->returnLista($this->model->getInstrutoresCET($matriculaCET));
     }

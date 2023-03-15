@@ -30,6 +30,7 @@ class InstrutorRouter
             Route::get('/responsaveis-cet', [InstrutorController::class, 'getResponsaveisCET']);
             Route::get('/instrutores-com-pendencias/{matricula_cet}/{days_to_expiration}', [InstrutorController::class, 'getInstrutoresComPendencias']);
             Route::get('/instrutores-com-pendencias-tsa/{matricula_cet}/{days_to_expiration}', [InstrutorController::class, 'getInstrutoresComPendenciasComTSA']);
+            Route::get('/get-instrutores-ponto/{ponto}', [InstrutorController::class, 'getInstrutoresPontoTalento']);
         };
     }
 }

@@ -18,6 +18,10 @@ class InstrutorService
         return $this->repository->getInstrutores();
     }
 
+    public function getInstrutoresPontoTalento($ponto){
+        return $this->repository->getInstrutoresPontoTalento($ponto);
+    }
+
     public function getInstrutoresCet($matriculaCET){
         return $this->repository->getInstrutoresCet($matriculaCET);
     }

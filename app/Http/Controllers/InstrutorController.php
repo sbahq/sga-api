@@ -20,6 +20,10 @@ class InstrutorController extends Controller
         return $this->service->getInstrutores();
     }
 
+    public function getInstrutoresPontoTalento($ponto){
+        return $this->response->getInstrutoresPontoTalento($ponto);
+    }
+
     public function getInstrutoresCet($matriculaCET){
         return $this->response->getInstrutoresCet($matriculaCET);
     }
