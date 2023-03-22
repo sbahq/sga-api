@@ -43,16 +43,20 @@ class PontoInstrutorRepository
     }
 
     public function savePontosInstrutor($request){
-        $data = $request->all();
+        return $data = $request->all();
+        $cet = $data['cet'];
+        $regional = $data['regional'];
         $pontos = explode(',', $data['pontos']); 
         $dataSave = [];
+
         for($i=0;($i<count($pontos)-1);$i++){
             $dataSave[] = Array(
                 'ponto_id' => $pontos[$i],
-                'matricula' => $data['instrutor']
+                'matricula' => $data['matricula']
             );
         }
-        $this->model->deletePontosInstrutor($data['instrutor']);
+
+        $this->model->deletePontosInstrutor($data['matricula']);
         if( count($dataSave) == 0 ) return 1;
         else return $this->model->savePontosInstrutor($dataSave);
     }
