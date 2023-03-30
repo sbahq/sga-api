@@ -74,6 +74,17 @@ return [
             'prefix'    => '',
         ],
 
+        'mysql_talento' => [
+            'driver'    => 'mysql',
+            'host'      => \App\Helpers\AppConstantes::instance()->DB_HOST_BANCO_TALENTO,
+            'database'  => \App\Helpers\AppConstantes::instance()->DB_DATABASE_BANCO_TALENTO,
+            'username'  => \App\Helpers\AppConstantes::instance()->DB_USERNAME_BANCO_TALENTO,
+            'password'  => \App\Helpers\AppConstantes::instance()->DB_PASSWORD_BANCO_TALENTO,
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

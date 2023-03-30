@@ -9,7 +9,7 @@ class Ponto extends Model
 {
 
     public function getPontos(){
-        $pontos = DB::connection('mysql_sbahq')->select("select * from pontos order by numero");
+        $pontos = DB::connection('mysql_talento')->select("select * from pontos order by numero");
         return $pontos;
     }
 

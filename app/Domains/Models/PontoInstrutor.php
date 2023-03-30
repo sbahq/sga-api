@@ -9,16 +9,16 @@ class PontoInstrutor extends Model
 {
 
     public function getPontosInstrutor($matricula){
-        $pontosInstrutor = DB::connection('mysql_sbahq')->select("select * from pontos_instrutor where matricula = {$matricula}");
+        $pontosInstrutor = DB::connection('mysql_talento')->select("select * from pontos_instrutor where matricula = {$matricula}");
         return $pontosInstrutor;
     }
 
     public function deletePontosInstrutor($matriculaInstrutor){
-        DB::connection('mysql_sbahq')->table('pontos_instrutor')->where('matricula', $matriculaInstrutor)->delete();
+        DB::connection('mysql_talento')->table('pontos_instrutor')->where('matricula', $matriculaInstrutor)->delete();
     }
 
     public function savePontosInstrutor($dataSave){
-        return DB::connection('mysql_sbahq')->table('pontos_instrutor')->insert($dataSave);
+        return DB::connection('mysql_talento')->table('pontos_instrutor')->insert($dataSave);
     }
 
 }
