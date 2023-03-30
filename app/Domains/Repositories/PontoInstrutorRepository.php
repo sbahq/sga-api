@@ -43,9 +43,7 @@ class PontoInstrutorRepository
     }
 
     public function savePontosInstrutor($request){
-        return $data = $request->all();
-        $cet = $data['cet'];
-        $regional = $data['regional'];
+        $data = $request->all();
         $pontos = explode(',', $data['pontos']); 
         $dataSave = [];
 
