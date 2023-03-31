@@ -17,4 +17,8 @@ class PontoService
         return $this->repository->getPontos();
     }
 
+    public function getPontosMatricula($matricula){
+        return $this->repository->getPontosMatricula($matricula);
+    }
+
 }

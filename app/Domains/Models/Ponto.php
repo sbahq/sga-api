@@ -13,4 +13,22 @@ class Ponto extends Model
         return $pontos;
     }
 
+    public function getPontosMatricula($matricula){
+        $sql = "
+        select
+        p.id,
+        p.indicador_me,
+        p.numero,
+        p.nome
+        from
+        pontos_instrutor ppi join pontos p
+        on ppi.ponto_id = p.id 
+        where matricula = {$matricula}
+        order by
+        p.indicador_me, p.numero    
+        ";
+        $pontos = DB::connection('mysql_talento')->select($sql);
+        return $pontos;
+    }
+
 }

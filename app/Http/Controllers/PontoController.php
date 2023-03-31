@@ -18,4 +18,8 @@ class PontoController extends Controller
         return response()->json($this->response->getPontos(), 200);
     }
 
+    public function getPontosMatricula($matricula){
+        return response()->json($this->response->getPontosMatricula($matricula), 200);
+    }
+
 }

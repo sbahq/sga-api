@@ -18,4 +18,8 @@ class PontoResponse
         return $this->service->getPontos();
     }
 
+    public function getPontosMatricula($matricula){
+        return $this->service->getPontosMatricula($matricula);
+    }
+
 }

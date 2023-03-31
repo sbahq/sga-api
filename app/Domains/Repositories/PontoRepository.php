@@ -44,4 +44,24 @@ class PontoRepository
 
     }
 
+    public function getPontosMatricula($matricula){
+
+        $pontos = $this->model->getPontosMatricula($matricula);
+        $response = [];
+        $return = [];
+
+        if( count($pontos) > 0 ){
+            foreach($pontos as $ponto){
+                array_push($return, $this->returnArrayPonto($ponto));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+
+    }
+
 }

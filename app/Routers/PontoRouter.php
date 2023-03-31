@@ -17,6 +17,7 @@ class PontoRouter
     {
         return function ($router) {
             Route::get('/get-pontos', [PontoController::class, 'getPontos']);
+            Route::get('/get-pontos-matricula/{matricula}', [PontoController::class, 'getPontosMatricula']);
         };
     }
 }
