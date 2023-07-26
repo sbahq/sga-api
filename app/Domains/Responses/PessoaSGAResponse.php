@@ -25,6 +25,14 @@ class PessoaSGAResponse
         return $this->service->getPresidenteComissaoCET();
     }
 
+    public function getSecretarioGeral(){
+        return $this->service->getSecretarioGeral();
+    }
+
+    public function getSenhaUsuario($idPessoa){
+        return $this->service->getSenhaUsuario($idPessoa);
+    }
+
     public function getResponsaveisCertificadoSaida(){
         return $this->service->getResponsaveisCertificadoSaida();
     }

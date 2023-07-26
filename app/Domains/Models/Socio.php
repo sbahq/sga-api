@@ -148,4 +148,86 @@ class Socio extends Model
 
     }
 
+    public function getAssociadoCPF($cpf){
+        $sql = "select * from vw_associados va where va.cpf = '{$cpf}'";
+        $associado = DB::connection('mysql_sbahq')->select( $sql );
+        return $associado;
+    }
+
+    public function getAssociadoEmail($email){
+        $sql = "select * from vw_associados va where va.email = '{$email}'";
+        $associado = DB::connection('mysql_sbahq')->select( $sql );
+        return $associado;
+    }
+    
+    public function getPessoaCPF($cpf){
+        $sql = "
+            select 
+            p.ID_PESSOA as id_pessoa, 
+            p.NOME as nome,
+            null as categoria,
+            null as regional,
+            null     AS email,
+            null as celular,
+            null as telefone,
+            null as matricula,
+            null as cpf,
+            null as rg,
+            null as orgao_emissor_rg,
+            null as titulo_eleitor,
+            null as nome_profissional,
+            null as sexo,
+            null as data_nascimento,
+            null as crm,
+            null as estado_crm,
+            null as data_cadastro,
+            null as data_inicio,
+            null as data_termino,
+            null as rua,
+            null as bairro,
+            null as complemento,
+            null as cidade,
+            null as estado,
+            null as pais,
+            null as cep
+            from PESSOA p where p.CPF = '{$cpf}'";
+        $pessoa = DB::connection('mysql_sbahq')->select( $sql );
+        return $pessoa;
+    }
+
+    public function getPessoaSecret3CPF($cpf){
+        $sql = "
+            select 
+            p.ID_PESSOA as id_pessoa, 
+            p.NOME as nome,
+            null as categoria,
+            null as regional,
+            null     AS email,
+            null as celular,
+            null as telefone,
+            p.MATRICULA as matricula,
+            null as cpf,
+            null as rg,
+            null as orgao_emissor_rg,
+            null as titulo_eleitor,
+            null as nome_profissional,
+            null as sexo,
+            null as data_nascimento,
+            null as crm,
+            null as estado_crm,
+            null as data_cadastro,
+            null as data_inicio,
+            null as data_termino,
+            null as rua,
+            null as bairro,
+            null as complemento,
+            null as cidade,
+            null as estado,
+            null as pais,
+            null as cep
+            from SECRET3 p where p.CPF = '{$cpf}'";
+        $pessoa = DB::connection('mysql_sbahq')->select( $sql );
+        return $pessoa;
+    }
+
 }

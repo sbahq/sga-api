@@ -128,6 +128,7 @@ class AppHelper
 
     public function formatDate($pDate, $pFormatIn = 'Y-m-d H:i:s', $pFormatOut = 'Y-m-d')
     {
+        if(strlen($pDate) == 10) $pFormatIn = 'Y-m-d';
         if (trim($pDate) != '') {
             try {
                 $date = \DateTime::createFromFormat($pFormatIn, $pDate);

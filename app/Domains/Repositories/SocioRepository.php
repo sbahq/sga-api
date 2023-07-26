@@ -225,4 +225,76 @@ class SocioRepository
         return $this->model->saveBoletosItau($data);
     }
 
+    public function getAssociadoCPF($cpf){
+        $socios = $this->model->getAssociadoCPF($cpf);
+        $response = [];
+        $return = [];
+
+        if( count($socios) > 0 ){
+            foreach($socios as $socio){
+                array_push($return, $this->returnArraySocio($socio));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+    public function getAssociadoEmail($email){
+        $socios = $this->model->getAssociadoEmail($email);
+        $response = [];
+        $return = [];
+
+        if( count($socios) > 0 ){
+            foreach($socios as $socio){
+                array_push($return, $this->returnArraySocio($socio));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+    public function getPessoaCPF($cpf){
+        $socios = $this->model->getPessoaCPF($cpf);
+        $response = [];
+        $return = [];
+
+        if( count($socios) > 0 ){
+            foreach($socios as $socio){
+                array_push($return, $this->returnArraySocio($socio));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+    public function getPessoaSecret3CPF($cpf){
+        $socios = $this->model->getPessoaSecret3CPF($cpf);
+        $response = [];
+        $return = [];
+
+        if( count($socios) > 0 ){
+            foreach($socios as $socio){
+                array_push($return, $this->returnArraySocio($socio));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
 }

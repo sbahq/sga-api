@@ -67,6 +67,10 @@ Route::group([
     ], \App\Routers\CetRouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'hospital-mec'
+    ], \App\Routers\HospitalMECRouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'vaga'
     ], \App\Routers\VagaRouter::instance()->router( $router ));
 

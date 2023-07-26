@@ -50,4 +50,20 @@ class SocioService
         return $this->repository->autenticarSocio( $user, $password);
     }
 
+    public function getAssociadoCPF($cpf){
+        return $this->repository->getAssociadoCPF( $cpf );
+    }
+
+    public function getAssociadoEmail($email){
+        return $this->repository->getAssociadoEmail( $email );
+    }
+
+    public function getPessoaCPF($cpf){
+        return $this->repository->getPessoaCPF( $cpf );
+    }
+
+    public function getPessoaSecret3CPF($cpf){
+        return $this->repository->getPessoaSecret3CPF( $cpf );
+    }
+
 }

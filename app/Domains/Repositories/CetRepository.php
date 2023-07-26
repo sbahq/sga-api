@@ -10,6 +10,8 @@ class CetRepository
 {
 
     private $model;
+    private $validate;
+
     public function __construct()
     {
         $this->model = new Cet();

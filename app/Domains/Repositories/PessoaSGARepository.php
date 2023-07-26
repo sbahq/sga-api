@@ -116,6 +116,43 @@ class PessoaSGARepository
         return $response;
     }
 
+    public function getSecretarioGeral(){
+        $pessoas = $this->model->getSecretarioGeral();
+        $response = [];
+        $return = [];
+
+        if( count($pessoas) > 0 ){
+            foreach($pessoas as $pessoa){
+                array_push($return, $this->returnArrayPessoa($pessoa));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+    public function getSenhaUsuario($idPessoa){
+        $pessoas = $this->model->getSenhaUsuario($idPessoa);
+        $response = [];
+        $return = [];
+
+        if( count($pessoas) > 0 ){
+            foreach($pessoas as $pessoa){
+                array_push($return, array('senha' => $pessoa->senha));
+            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+    
+
     public function getResponsaveisCertificadoSaida(){
 
         $pessoas = $this->model->getResponsaveisCertificadoSaida();

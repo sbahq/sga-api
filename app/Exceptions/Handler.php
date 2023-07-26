@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
 
     private function showMessage($e, $message, $request){
 
-        if( isset($request['show-detail-error']) )
+        if( isset($request['show-error']) )
             return ['message' => array(
                 'line' => $e->getLine(),
                 'file' => $e->getFile(),

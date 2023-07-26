@@ -21,6 +21,14 @@ class PessoaSGAController extends Controller
     public function getMembrosComissaoCET(){
         return response()->json($this->response->getMembrosComissaoCET(), 200);
     }
+    
+    public function getSecretarioGeral(){
+        return response()->json($this->response->getSecretarioGeral(), 200);
+    }
+
+    public function getSenhaUsuario($idPessoa){
+        return response()->json($this->response->getSenhaUsuario($idPessoa), 200);
+    }
 
     public function getPresidenteComissaoCET(){
         return response()->json($this->response->getPresidenteComissaoCET(), 200);

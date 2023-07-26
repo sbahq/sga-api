@@ -22,6 +22,14 @@ class PessoaSGAService
         return $this->repository->getMembrosComissaoCET();
     }
 
+    public function getSecretarioGeral(){
+        return $this->repository->getSecretarioGeral();
+    }
+
+    public function getSenhaUsuario($idPessoa){
+        return $this->repository->getSenhaUsuario($idPessoa);
+    }
+
     public function getPresidenteComissaoCET(){
         return $this->repository->getPresidenteComissaoCET();
     }

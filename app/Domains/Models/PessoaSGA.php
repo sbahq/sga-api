@@ -23,6 +23,16 @@ class PessoaSGA extends Model
         return $membrosComissaoCET;
     }
 
+    public function getSecretarioGeral(){
+        $secretarioGeral = DB::connection('mysql_sbahq')->select("select * from vw_secretario_geral");
+        return $secretarioGeral;
+    }
+
+    public function getSenhaUsuario($idPessoa){
+        $senhaUsuario = DB::connection('mysql_sbahq')->select("select SENHA as senha from USUARIOS u where u.ID_PESSOA ={$idPessoa}");
+        return $senhaUsuario;
+    }
+
     public function getResponsaveisCertificadoSaida(){
         $responsaveisCertificadoSaida = DB::connection('mysql_sbahq')->select("select * from vw_responsaveis_certificado_saida");
         return $responsaveisCertificadoSaida;
