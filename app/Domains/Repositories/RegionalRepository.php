@@ -25,6 +25,7 @@ class RegionalRepository
             'matricula_presidente' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($regional->matricula_presidente),
             'sigla' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($regional->sigla),
             'uf' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($regional->uf),
+            'telefone' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($regional->telefone),
         );
     }
 
