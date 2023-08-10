@@ -165,7 +165,7 @@ class Socio extends Model
             select 
             p.ID_PESSOA as id_pessoa, 
             p.NOME as nome,
-            null as categoria,
+            s.CATEGORIA as categoria,
             null as regional,
             null     AS email,
             null as celular,
@@ -190,7 +190,7 @@ class Socio extends Model
             null as estado,
             null as pais,
             null as cep
-            from PESSOA p where p.CPF = '{$cpf}'";
+            from PESSOA p left join SECRET2 s on p.ID_PESSOA = s.ID_PESSOA where p.CPF = '{$cpf}'";
         $pessoa = DB::connection('mysql_sbahq')->select( $sql );
         return $pessoa;
     }
