@@ -21,11 +21,12 @@ class Instrutor extends Model
         select
         viv.*
         from
-        pontos_instrutor poi join vw_instrutores_vagas viv 
+        banco_talentos.pontos_instrutor poi join vw_instrutores_vagas viv 
         on poi.matricula = viv.matricula
         where
         poi.ponto_id = {$ponto}
         ";
+        return 
         $pontosInstrutor = DB::connection('mysql_sbahq')->select($sql);
         return $pontosInstrutor;
     }
