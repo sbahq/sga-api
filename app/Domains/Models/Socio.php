@@ -200,7 +200,7 @@ class Socio extends Model
             select 
             p.ID_PESSOA as id_pessoa, 
             p.NOME as nome,
-            null as categoria,
+            p.CATEGORIA as categoria,
             null as regional,
             null     AS email,
             null as celular,
