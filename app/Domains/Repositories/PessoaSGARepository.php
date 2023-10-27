@@ -56,6 +56,7 @@ class PessoaSGARepository
             'bairro' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->bairro),
             'caixa_postal' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($pessoa->caixa_postal),
             'cep' => $pessoa->cep,
+            'estrangeiro' => $pessoa->estrangeiro
         );
     }
 
