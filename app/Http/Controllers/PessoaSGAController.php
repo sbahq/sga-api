@@ -38,4 +38,8 @@ class PessoaSGAController extends Controller
         return response()->json($this->response->getResponsaveisCertificadoSaida(), 200);
     }
 
+    public function getResponsaveisCertificadoSaidaAno($ano){
+        return response()->json($this->response->getResponsaveisCertificadoSaidaAno($ano), 200);
+    }
+
 }

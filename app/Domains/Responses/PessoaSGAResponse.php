@@ -37,4 +37,8 @@ class PessoaSGAResponse
         return $this->service->getResponsaveisCertificadoSaida();
     }
 
+    public function getResponsaveisCertificadoSaidaAno($ano){
+        return $this->service->getResponsaveisCertificadoSaidaAno($ano);
+    }
+
 }

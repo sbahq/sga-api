@@ -33,9 +33,13 @@ class PessoaSGAService
     public function getPresidenteComissaoCET(){
         return $this->repository->getPresidenteComissaoCET();
     }
-    
+
     public function getResponsaveisCertificadoSaida(){
         return $this->repository->getResponsaveisCertificadoSaida();
+    }
+
+    public function getResponsaveisCertificadoSaidaAno($ano){
+        return $this->repository->getResponsaveisCertificadoSaidaAno($ano);
     }
 
 }

@@ -22,6 +22,7 @@ class PessoaSGARouter
             Route::get('/presidente-comissao-cet', [PessoaSGAController::class, 'getPresidenteComissaoCET']);
             Route::get('/secretario-geral', [PessoaSGAController::class, 'getSecretarioGeral']);
             Route::get('/responsaveis-certificado-saida', [PessoaSGAController::class, 'getResponsaveisCertificadoSaida']);
+            Route::get('/responsaveis-certificado-saida-ano/{ano}', [PessoaSGAController::class, 'getResponsaveisCertificadoSaidaAno']);
         };
     }
 }
