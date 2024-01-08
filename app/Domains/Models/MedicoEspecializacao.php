@@ -25,7 +25,7 @@ class MedicoEspecializacao extends Model
 
     public function getMedicosEspecializacaoFinalizadoPeriodoME($matriculaCET){
 
-        $sql = "select * from vw_me_cet vmc where lower(vmc.situacao) = 'desligado falta ce' and (year(now()) - year(vmc.data_fim)) <= 10 and date(now()) >date(vmc.data_fim) and vmc.indicador_me = 3 and vmc.matricula_cet = {$matriculaCET} order by vmc.data_fim desc, vmc.nome";
+        $sql = "select * from vw_me_cet vmc where lower(vmc.situacao) = 'desligado falta ce' and (year(now()) - year(vmc.data_fim)) <= 10 and date(now()) > date(vmc.data_fim) and vmc.indicador_me = 3 and vmc.matricula_cet = {$matriculaCET} order by vmc.data_fim desc, vmc.nome";
         $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
 
