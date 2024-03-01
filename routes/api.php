@@ -63,6 +63,14 @@ Route::group([
     ], \App\Routers\RegionalRouter::instance()->router( $router ));
 
     Route::group([
+        'prefix' => 'instituicao-ensino'
+    ], \App\Routers\InstituicaoEnsinoRouter::instance()->router( $router ));
+
+    Route::group([
+        'prefix' => 'liga-academica'
+    ], \App\Routers\LigaAcademicaRouter::instance()->router( $router ));
+
+    Route::group([
         'prefix' => 'cet'
     ], \App\Routers\CetRouter::instance()->router( $router ));
 
