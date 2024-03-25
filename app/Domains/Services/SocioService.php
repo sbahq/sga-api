@@ -54,6 +54,10 @@ class SocioService
         return $this->repository->getAssociadoCPF( $cpf );
     }
 
+    public function getAssociadoCPFStatus($cpf){
+        return $this->repository->getAssociadoCPFStatus( $cpf );
+    }
+
     public function getAssociadoEmail($email){
         return $this->repository->getAssociadoEmail( $email );
     }

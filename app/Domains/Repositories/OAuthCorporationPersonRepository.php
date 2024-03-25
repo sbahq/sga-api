@@ -13,13 +13,18 @@ class OAuthCorporationPersonRepository extends Repository
     }
 
     public function authentication($request){
-        $token = trim( request()->header('token') );
+
+        $token = trim( request()->header('x-token') );
+        if( is_null( $token ) || $token == '' )
+            $token = trim( request()->header('token') );
+
         $corporationToken = $this->findBy('open_token', $token);
         if( isset( $corporationToken['items'] ) ){
             return password_verify($token, $corporationToken['items'][0]['api_token']);
         } else {
             return false;
         }
+
     }
 
 }

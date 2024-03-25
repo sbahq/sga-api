@@ -30,6 +30,10 @@ class SocioController extends Controller
         return response()->json($this->service->getAssociadoCPF( $cpf ), 200);
     }
 
+    public function getAssociadoCPFStatus($cpf){
+        return response()->json($this->service->getAssociadoCPFStatus( $cpf ), 200);
+    }
+
     public function getAssociadoEmail($email){
         return response()->json($this->service->getAssociadoEmail( $email ), 200);
     }

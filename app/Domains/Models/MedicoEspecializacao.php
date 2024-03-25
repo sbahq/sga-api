@@ -32,7 +32,7 @@ class MedicoEspecializacao extends Model
     }
 
     public function getTodosMedicosEspecializacaoFinalizadoPeriodoME($requestAll){
-        
+
         $limit = ( isset($requestAll['limit']) ? $requestAll['limit'] : 10 );
         $offSet = ( isset($requestAll['offset']) ? $requestAll['offset'] : 0 );
 
@@ -67,13 +67,15 @@ class MedicoEspecializacao extends Model
 
     public function getMedicosEspecializacaoFinalizadoPeriodoMEByMatriculaCETNome($matriculaCET, $nomeME){
 
-        $medicos = DB::connection('mysql_sbahq')->table('vw_me_cet')
-                                                ->where("lower(situacao)","desligado falta ce")
-                                                ->where("indicador_me","3")
-                                                ->where('matricula_cet', $matriculaCET)
-                                                ->where('nome', 'like', '%'. $nomeME .'%')
-                                                ->orderBy('data_fim desc')
-                                                ->get();
+        $sql = "select * from vw_me_cet vmc
+        where
+        vmc.matricula_cet = {$matriculaCET}
+        and vmc.nome like '%{$nomeME}%'
+        and lower(situacao) = 'desligado falta ce'
+        and vmc.indicador_me = 3 
+        order by vmc.nome";
+
+        $medicos = DB::connection('mysql_sbahq')->select($sql);
         return $medicos;
 
     }

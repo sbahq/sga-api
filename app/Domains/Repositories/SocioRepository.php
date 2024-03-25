@@ -47,7 +47,32 @@ class SocioRepository
         );
     }
 
+    private function returnArraySocioStatus($socio){
+        return array(
+            'matricula' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->matricula),
+            'nome' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->nome),
+            'categoria' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->categoria),
+            'categoria_descricao' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->categoria_descricao),
+            'regional' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->regional),
+            'nome_profissional' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->nome_profissional),
+            'sexo' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->sexo),
+            'celular' => \App\Helpers\AppHelper::instance()->leftOnlyNumber( \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->celular) ),
+            'email' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->email),
+            'pais' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->pais),
+            'cep' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->cep),
+            'estado' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->estado),
+            'cidade' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->cidade),
+            'bairro' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->bairro),
+            'rua' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->rua),
+            'complemento' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->complemento),
+            'cpf' => \App\Helpers\AppHelper::instance()->leftOnlyNumber($socio->cpf),
+            'crm' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->crm),
+            'estado_crm' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->estado_crm),
+        );
+    }
+
     public function getSociosEmDia($field, $value){
+
         $socios = $this->model->getSociosEmDia($field, $value);
         $response = [];
         $return = [];
@@ -63,6 +88,7 @@ class SocioRepository
             $response = $this->validate->getErrorMessage($message);
         }
         return $response;
+
     }
 
     public function getUsuarioByMatricula($matricula){
@@ -72,6 +98,7 @@ class SocioRepository
         $return = [];
 
         if( count($socios) > 0 ){
+
             foreach($socios as $socio){
                 array_push($return, array(
                     'id_pessoa'     => $socio->ID_PESSOA,
@@ -83,6 +110,7 @@ class SocioRepository
                     'cpf'           => $socio->CPF
                 ));
             }
+
             $response = $this->validate->getSuccessMessage();
             $response['items'] = $return;
         } else {
@@ -239,6 +267,47 @@ class SocioRepository
         } else {
             $message = ['message' => 'Não encontrado'];
             $response = $this->validate->getErrorMessage($message);
+        }
+        return $response;
+    }
+
+    public function getAssociadoCPFStatus($cpf){
+
+        $socios = $this->model->getAssociadoCPF($cpf);
+        $response = [];
+        $return = [];
+
+        if( count($socios) > 0 ){
+            $error = false;
+            $messageErro = '';
+            foreach($socios as $socio){
+
+                if( $socio->anuidade_sba_vencida_status == 1 ){
+                    $error = true;
+                    $messageErro = 'Sua anuidade junto a SBA encontrasse atrasada, favor regularizar sua situação';
+                }
+
+                if( $socio->anuidade_regional_vencida_status == 1 ){
+                    $error = true;
+                    if( $messageErro == '' ) $messageErro = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontrasse atrasada, favor regularizar sua situação';
+                    else {
+                        $messageErro = 'Suas anuidades junto a Regional ' . $socio->regional . ' e a SBA encontram-se em atraso, favor regularizar sua situação.';
+                    }
+                }
+                if(!$error) array_push($return, $this->returnArraySocioStatus($socio));
+
+            }
+            if(!$error){
+                $response = $this->validate->getSuccessMessage();
+                $response['items'] = $return;
+            } else {
+                $message = ['message' => $messageErro];
+                $response = $this->validate->getErrorMessage( $message );
+            }
+
+        } else {
+            $message = ['message' => 'Não encontrado'];
+            $response = $this->validate->getErrorMessage( $message );
         }
         return $response;
     }
