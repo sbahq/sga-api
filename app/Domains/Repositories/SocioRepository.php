@@ -276,41 +276,46 @@ class SocioRepository
 
     public function getAssociadoCPFStatus($cpf){
 
-        $socios = $this->model->getAssociadoCPF($cpf);
         $response = [];
         $return = [];
+        if( !empty(trim($cpf)) ){
+            $socios = $this->model->getAssociadoCPF($cpf);
+            if( count($socios) > 0 ){
+                $error = false;
+                $messageErro = '';
+                foreach($socios as $socio){
 
-        if( count($socios) > 0 ){
-            $error = false;
-            $messageErro = '';
-            foreach($socios as $socio){
+                    $socio->message_situacao_financeira = '';
 
-                $socio->message_situacao_financeira = '';
-
-                if( $socio->anuidade_sba_vencida_status == 1 ){
-                    $error = true;
-                    $messageErro = '1';
-                    $socio->message_situacao_financeira = 'Sua anuidade junto a SBA encontra-se atrasada, favor regularizar sua situação';
-                }
-
-                if( $socio->anuidade_regional_vencida_status == 1 ){
-                    $error = true;
-                    if( $messageErro == '' ) $socio->message_situacao_financeira = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontra-se atrasada, favor regularizar sua situação';
-                    else {
-                        $socio->message_situacao_financeira = 'Suas anuidades junto a SBA e a Regional ' . $socio->regional . ' encontram-se em atraso, favor regularizar sua situação.';
+                    if( $socio->anuidade_sba_vencida_status == 1 ){
+                        $error = true;
+                        $messageErro = '1';
+                        $socio->message_situacao_financeira = 'Sua anuidade junto a SBA encontra-se atrasada, favor regularizar sua situação';
                     }
+
+                    if( $socio->anuidade_regional_vencida_status == 1 ){
+                        $error = true;
+                        if( $messageErro == '' ) $socio->message_situacao_financeira = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontra-se atrasada, favor regularizar sua situação';
+                        else {
+                            $socio->message_situacao_financeira = 'Suas anuidades junto a SBA e a Regional ' . $socio->regional . ' encontram-se em atraso, favor regularizar sua situação.';
+                        }
+                    }
+
+                    if( $messageErro == '' ) $socio->message_situacao_financeira = 'OK';
+                    array_push($return, (array)$socio);
+
                 }
+                $response = $this->validate->getSuccessMessage();
+                $response['items'] = $return;
 
-                if( $messageErro == '' ) $socio->message_situacao_financeira = 'OK';
-                array_push($return, (array)$socio);
 
+            } else {
+                $message = ['message' => 'Não encontrado'];
+                $response = $this->validate->getErrorMessage( $message );
             }
-            $response = $this->validate->getSuccessMessage();
-            $response['items'] = $return;
-
 
         } else {
-            $message = ['message' => 'Não encontrado'];
+            $message = ['message' => 'CPF não informado.'];
             $response = $this->validate->getErrorMessage( $message );
         }
         return $response;
