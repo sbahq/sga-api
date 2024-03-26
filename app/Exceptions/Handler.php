@@ -89,7 +89,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (QueryException $e, $request) {
-            $message = $this->showMessage($e, 'Ocorreu um erro de SQL, favor contactar a SBA.', $request);
+            $message = $this->showMessage($e, 'Ocorreu um erro de SQL, favor entrar em contato com a SBA.', $request);
             $response = \App\Domains\Validations\Validation::instance()->getErrorMessage($message);
             return response()->json($response,500);
         });

@@ -284,16 +284,17 @@ class SocioRepository
 
                 if( $socio->anuidade_sba_vencida_status == 1 ){
                     $error = true;
-                    $messageErro = 'Sua anuidade junto a SBA encontrasse atrasada, favor regularizar sua situação';
+                    $messageErro = 'Sua anuidade junto a SBA encontra-se atrasada, favor regularizar sua situação';
                 }
 
                 if( $socio->anuidade_regional_vencida_status == 1 ){
                     $error = true;
-                    if( $messageErro == '' ) $messageErro = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontrasse atrasada, favor regularizar sua situação';
+                    if( $messageErro == '' ) $messageErro = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontra-se atrasada, favor regularizar sua situação';
                     else {
-                        $messageErro = 'Suas anuidades junto a Regional ' . $socio->regional . ' e a SBA encontram-se em atraso, favor regularizar sua situação.';
+                        $messageErro = 'Suas anuidades junto a Regional ' . $socio->regional . ' e a SBA encontra-se em atraso, favor regularizar sua situação.';
                     }
                 }
+
                 if(!$error) array_push($return, $this->returnArraySocioStatus($socio));
 
             }
