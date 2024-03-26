@@ -5,6 +5,7 @@ namespace App\Domains\Repositories;
 use App\Domains\Models\Socio;
 use App\Domains\Validations\Validation;
 use App\Exceptions\CustomException;
+use stdClass;
 
 class SocioRepository
 {
@@ -68,6 +69,8 @@ class SocioRepository
             'cpf' => \App\Helpers\AppHelper::instance()->leftOnlyNumber($socio->cpf),
             'crm' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->crm),
             'estado_crm' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->estado_crm),
+            'anuidade_sba_vencida_status' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->anuidade_sba_vencida_status),
+            'anuidade_regional_vencida_status' => \App\Helpers\AppHelper::instance()->isEmpetyOrNull($socio->anuidade_regional_vencida_status)
         );
     }
 
@@ -282,29 +285,29 @@ class SocioRepository
             $messageErro = '';
             foreach($socios as $socio){
 
+                $socio->message_situacao_financeira = '';
+
                 if( $socio->anuidade_sba_vencida_status == 1 ){
                     $error = true;
-                    $messageErro = 'Sua anuidade junto a SBA encontra-se atrasada, favor regularizar sua situação';
+                    $messageErro = '1';
+                    $socio->message_situacao_financeira = 'Sua anuidade junto a SBA encontra-se atrasada, favor regularizar sua situação';
                 }
 
                 if( $socio->anuidade_regional_vencida_status == 1 ){
                     $error = true;
-                    if( $messageErro == '' ) $messageErro = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontra-se atrasada, favor regularizar sua situação';
+                    if( $messageErro == '' ) $socio->message_situacao_financeira = 'Sua anuidade junto a Regional ' . $socio->regional . ' encontra-se atrasada, favor regularizar sua situação';
                     else {
-                        $messageErro = 'Suas anuidades junto a Regional ' . $socio->regional . ' e a SBA encontra-se em atraso, favor regularizar sua situação.';
+                        $socio->message_situacao_financeira = 'Suas anuidades junto a SBA e a Regional ' . $socio->regional . ' encontram-se em atraso, favor regularizar sua situação.';
                     }
                 }
 
-                if(!$error) array_push($return, $this->returnArraySocioStatus($socio));
+                if( $messageErro == '' ) $socio->message_situacao_financeira = 'OK';
+                array_push($return, (array)$socio);
 
             }
-            if(!$error){
-                $response = $this->validate->getSuccessMessage();
-                $response['items'] = $return;
-            } else {
-                $message = ['message' => $messageErro];
-                $response = $this->validate->getErrorMessage( $message );
-            }
+            $response = $this->validate->getSuccessMessage();
+            $response['items'] = $return;
+
 
         } else {
             $message = ['message' => 'Não encontrado'];
